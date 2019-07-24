@@ -1,5 +1,6 @@
 from app import db, ma
 from marshmallow import fields
+# pylint: disable=W0611
 from .writing import Writing
 from .writer import WriterSchema, Writer
 from .writingbase import WritingBaseModel

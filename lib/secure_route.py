@@ -44,7 +44,7 @@ def secure_route_editor(func):
         except jwt.InvalidTokenError:
             return jsonify({'message': 'Invalid Token'}), 401
 
-        editor = Writer.query.get(payload.get('sub'))
+        editor = Editor.query.get(payload.get('sub'))
 
         if not editor:
             return jsonify({'message': 'Unauthorized'}), 401
