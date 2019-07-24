@@ -5,8 +5,8 @@ from .base import BaseModel, BaseSchema
 
 class WritingBaseModel(BaseModel):
 
-    title = db.Column(db.String(120), nullable=False)
-    text = db.Column(db.Text, nullable=False)
+    title = db.Column(db.String(120))
+    text = db.Column(db.Text)
 
 
 # class BaseWritingSchema(BaseSchema):

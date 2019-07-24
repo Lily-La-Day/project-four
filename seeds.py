@@ -1,11 +1,14 @@
 from app import app, db
 from models.writing import Writing
 from models.edit import Edit
+from models.final import Final
+from models.final import FinalSchema
 from models.writer import WriterSchema
 from models.editor import EditorSchema
 
 writer_schema = WriterSchema()
 editor_schema = EditorSchema()
+final_schema = FinalSchema()
 
 with app.app_context():
     db.drop_all()
@@ -24,6 +27,16 @@ with app.app_context():
     laila, errors = editor_schema.load({
             'username': 'laila',
             'email': 'laila@email',
+            'password': 'pass',
+            'password_confirmation': 'pass'
+        })
+
+    if errors:
+        raise Exception(errors)
+
+    lindsay, errors = editor_schema.load({
+            'username': 'lindsay',
+            'email': 'lindsay@email',
             'password': 'pass',
             'password_confirmation': 'pass'
         })
@@ -63,11 +76,19 @@ with app.app_context():
 
     edited_wes = Edit(title='Wes-Ed', original=wes, text='He is a very nice young man', editor=laila)
 
-    # shane = Writing(final_draft=edited_shane)
-    #
-    # jack = Writing(final_draft=edited_jack)
-    #
-    # wes = Writing(final_draft=edited_wes)
+    edited_shane_two = Edit(title='Shane-Ed', original=shane,
+     text='He does some stuff well in  code land and he is one whom rarely uses Google and watches the television box', editor=lindsay)
+
+    edited_jack_two = Edit(title='Jack-Ed', original=jack,
+    text='He is a master of felines and a cat called Cheeseburger and is fan of MindGeek', editor=lindsay)
+
+    edited_wes_two = Edit(title='Wes-Ed', original=wes, text='WE LIKE HIM COS He is a very nice young man', editor=lindsay)
+
+    final_wes = Final(edit=edited_wes)
+    final_jack = Final(edit=edited_jack_two)
+    final_shane = Final(edit=edited_shane)
+
+
 
 
     db.session.add(lily)
@@ -92,5 +113,8 @@ with app.app_context():
     db.session.add(edited_shane)
     db.session.add(edited_wes)
     db.session.add(edited_jack)
+    db.session.add(edited_shane_two)
+    db.session.add(edited_wes_two)
+    db.session.add(edited_jack_two)
 
     db.session.commit()
