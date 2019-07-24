@@ -25,5 +25,5 @@ class FinalSchema(ma.ModelSchema, BaseSchema):
     class Meta:
         model = Final
 
-    edit = fields.Nested('EditSchema', only=('id', ))
+    edit = fields.Nested('EditSchema', only=('original', ))
     # original = fields.Nested('WritingSchema', only=('id', ))
