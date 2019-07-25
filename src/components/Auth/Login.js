@@ -8,7 +8,8 @@ class Login extends React.Component {
 
     this.state = { data: {}, error: '' }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmitWriter = this.handleSubmitWriter.bind(this)
+    this.handleSubmitEditor = this.handleSubmitEditor.bind(this)
   }
 
   handleChange({ target: { name, value }}) {
@@ -16,7 +17,7 @@ class Login extends React.Component {
     this.setState({ data, error: '' })
   }
 
-  handleSubmit(e) {
+  handleSubmitEditor(e) {
     e.preventDefault()
 
     axios.post('/api/editorlogin', this.state.data)
@@ -27,10 +28,21 @@ class Login extends React.Component {
       .catch(() => this.setState({ error: 'Invalid Crendentials'}))
   }
 
+  handleSubmitWriter(e) {
+    e.preventDefault()
+
+    axios.post('/api/writerlogin', this.state.data)
+      .then(res => {
+        Auth.setToken(res.data.token)
+        this.props.history.push('/writings')
+      })
+      .catch(() => this.setState({ error: 'Invalid Crendentials'}))
+  }
+
   render(){
     return (
       <main>
-        <form className="form-style login" onSubmit={this.handleSubmit} >
+        <form className="form-style login" >
 
           <label className='label'>Email</label>
           <div className="control">
@@ -49,7 +61,8 @@ class Login extends React.Component {
               name="password"
               placeholder="Your Password Please."/>
           </div>
-          <button type="submit" className="button" > Login</button>
+          <button type="submit" className="button" onSubmit={this.handleSubmitEditor}> Login as Editor</button>
+          <button type="submit" className="button" onSubmit={this.handleSubmitWriter}> Login as Writer</button>
         </form>
       </main>
     )

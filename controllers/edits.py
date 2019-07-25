@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request, g
 from models.edit import Edit, EditSchema
+from models.writing import Writing
 from lib.secure_route import secure_route_editor
+
 
 api = Blueprint('edits', __name__)
 edit_schema = EditSchema()
@@ -12,7 +14,7 @@ def index():
     return edit_schema.jsonify(edits, many=True), 200
 
 
-@api.route('/edits', methods=['POST'])
+@api.route('/edits', methods=['edit'])
 @secure_route_editor
 def create():
     data = request.get_json()
@@ -25,3 +27,21 @@ def create():
     edit.editor = g.current_editor
     edit.save()
     return edit_schema.jsonify(edit), 201
+
+@api.route('/edits/<int:edit_id>', methods=['GET'])
+def showEdit(edit_id):
+    edit = Edit.query.get(edit_id)
+    if not edit:
+        return jsonify({'message': 'not found'}), 404
+    return edit_schema.jsonify(edit), 200
+
+@api.route('/writings/<int:writing_id>/edits', methods=['GET'])
+def showEdits(writing_id):
+    edits = Edit.query.join(Edit.original).filter(Writing.id == writing_id).all()
+    for edit in edits:
+        Edit.query.get(edit.id)
+        return edit_schema.jsonify(edit), 200
+
+    if not edits:
+        return jsonify({'message': 'not found'}), 404
+    return edit_schema.jsonify(edits), 200

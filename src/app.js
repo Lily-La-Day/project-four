@@ -4,7 +4,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './style.scss'
 import WritingsIndex from './components/writings/writingsIndex'
 import EditCreate from './components/writings/EditCreate'
-import EditorLogin from './components/Auth/EditorLogin'
+import WritingCreate from './components/writings/WritingCreate'
+// import WritingShow from './components/writings/WritingShow'
+import Login from './components/Auth/Login'
 
 
 
@@ -16,8 +18,10 @@ const App = () => {
       <main>
         <div>
           <Switch>
-            <Route path='/editorlogin' component={EditorLogin} />
-            <Route path='/writings/:id' component={EditCreate} />
+            <Route path='/login' component={Login} />
+            {/* <Route path='/writings/:id/' component={WritingShow} /> */}
+            <Route path='/writings/:id/edit' component={EditCreate} />
+            <Route path='/writingsubmit' component={WritingCreate} />
             <WritingsIndex />
           </Switch>
         </div>

@@ -55,7 +55,7 @@ class EditCreate extends React.Component {
 
   render() {
     if (!this.state.writing) return null
-    console.log(this.state.data)
+    console.log(this.state.writing)
     // this.diff('human', 'humat')
     const { writing } =  this.state
 
