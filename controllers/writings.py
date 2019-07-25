@@ -22,5 +22,15 @@ def create():
         return jsonify(errors), 422
 
     writing.author = g.current_writer
+    print(g.current_writer)
     writing.save()
     return writing_schema.jsonify(writing), 201
+
+@api.route('/writings/<int:writing_id>', methods=['GET'])
+def show(writing_id):
+    writing = Writing.query.get(writing_id)
+
+
+    if not writing:
+        return jsonify({'message': 'not found'}), 404
+    return writing_schema.jsonify(writing), 200

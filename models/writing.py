@@ -1,10 +1,11 @@
 from app import db, ma
 from marshmallow import fields
+# pylint: disable=W0611
 from .writer import Writer
+# from .edit import EditSchema
+
 from .base import BaseSchema
 from .writingbase import WritingBaseModel
-
-
 
 
 
@@ -15,6 +16,7 @@ class Writing(db.Model, WritingBaseModel):
     notes = db.Column(db.Text, nullable=True)
     author = db.relationship('Writer', backref='created_writings')
     author_id = db.Column(db.Integer, db.ForeignKey('writers.id'))
+
 
 
 

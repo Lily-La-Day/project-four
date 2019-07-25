@@ -44,7 +44,8 @@ with app.app_context():
     if errors:
         raise Exception(errors)
 
-    kasia = Writing(title='Kasia', text='A start-up starter, \n Plant based and is flourishing, \n Always smiling too', author=lily
+    kasia = Writing(
+    title='Kasia', text='A start-up starter, \n Plant based and is flourishing, \n Always smiling too', author=lily
      )
     cliff = Writing(title='Cliff', text='From a tiny land,\n He can watch sport all day long,\n The next crypto king?', author=lily)
     daniela = Writing(title='Daniela', text='Always lovely and warm,\n She asks all the best questions,\n And with that commute!', author=lily)

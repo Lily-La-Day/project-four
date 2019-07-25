@@ -51,5 +51,6 @@ def secure_route_editor(func):
 
         g.current_editor = editor
 
+
         return func(*args, **kwargs)
     return wrapper

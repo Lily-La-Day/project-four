@@ -15,10 +15,10 @@ def index():
 @api.route('/edits', methods=['POST'])
 @secure_route_editor
 def create():
-    print('editting')
     data = request.get_json()
+    print(data)
     edit, errors = edit_schema.load(data)
-
+    print(edit, errors)
     if errors:
         return jsonify(errors), 422
 
