@@ -13,7 +13,7 @@
 body {
   display: grid;
   font-family: 'Open Sans', sans-serif;
-  background-size: cover;
+background-size: cover;
   padding: 5%;
   height: 100vh;
 
@@ -380,7 +380,7 @@ grid-column: 1;
 }
 .wrapper {
   position: relative;
-  display: inline-block;
+  
   border: none;
   font-size: 14px;
   margin: 50px auto;
@@ -425,4 +425,27 @@ grid-column: 1;
 
 .wrapper label:hover:before {
   color: #FFC107;
+}
+
+.starSection {
+  width: 250px;
+  margin: 0 auto;
+}
+
+.starBefore {
+  width: 50px;
+  opacity: 0.2;
+}
+
+.starBefore:hover {
+  opacity: 1
+}
+
+.starAfter {
+  opacity: 1;
+}
+
+.star-text {
+  margin-top: 10px;
+  text-align: center;
 }

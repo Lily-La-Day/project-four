@@ -8,6 +8,9 @@ api = Blueprint('edits', __name__)
 edit_schema = EditSchema()
 
 
+
+
+
 @api.route('/edits', methods=['GET'])
 def index():
     edits = Edit.query.all()
@@ -35,6 +38,8 @@ def showEdit(edit_id):
         return jsonify({'message': 'not found'}), 404
     return edit_schema.jsonify(edit), 200
 
+
+
 @api.route('/writings/<int:writing_id>/edits', methods=['GET'])
 def showEdits(writing_id):
     edits = Edit.query.join(Edit.original).filter(Writing.id == writing_id).all()
@@ -44,12 +49,17 @@ def showEdits(writing_id):
     return edit_schema.jsonify(edits, many=True), 200
 
 
-@api.route('/writings/<int:writing_id>/edits/<int:edit_id>/like', methods=['POST'])
+@api.route('/edits/<int:edit_id>/like', methods=['POST'])
 @secure_route_editor
 def like(edit_id):
+
+    data = request.get_json()
+    print(data['rating'])
     edit = Edit.query.get(edit_id)
+    print(edit)
     if not edit:
         return jsonify({'message': 'Not Found'}), 404
-    edit.liked_by.append(g.current_user)
+    edit.liked_by.append(g.current_editor)
+    edit.rating = data['rating']
     edit.save()
     return edit_schema.jsonify(edit), 201

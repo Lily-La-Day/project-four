@@ -22,6 +22,7 @@ class Edit(db.Model, WritingBaseModel):
     editor = db.relationship('Editor', backref='created_edits')
     editor_id = db.Column(db.Integer, db.ForeignKey('editors.id'))
     liked_by = db.relationship('Editor', secondary=likes, backref='likes')
+    rating = db.Column(db.Integer, default=0)
 
 
 
