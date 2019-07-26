@@ -61,44 +61,47 @@ class EditCreate extends React.Component {
 
     return (
       <main>
-        <div className="titleContainer">
-          <h2 className="writingTitle">{writing.title}</h2>
-          <div className ="writing show">
+        <div className="edit-container">
+          <div className ="original">
+            <h2 className="original-title">{writing.title}</h2>
 
 
-            <span key={writing.id}><h3 key={writing.id}> {writing.text}</h3></span>
+
+            <h5 key={writing.id}> {writing.text}</h5>
 
           </div>
 
+
+          <form className="form-style create-edit" onSubmit={this.handleSubmit} >
+
+            <h3>Submit an Edit</h3>
+
+            <label className='label'>Title</label>
+            <div className="control">
+              <input
+                onChange = {this.handleChange}
+                className="input"
+                name="title"
+
+                defaultValue={this.state.writing.title}/>
+            </div>
+            <label className='label'>Your Edit</label>
+            <div className="control">
+              <textarea
+                onChange = {this.handleChange}
+                type="text"
+                className="submit-writing input"
+                name="text"
+                defaultValue= {this.state.writing.text}
+              />
+            </div>
+
+
+            <button type="submit" className="button" > Submit your edit. </button>
+
+
+          </form>
         </div>
-        <form className="form-style" onSubmit={this.handleSubmit} >
-
-          <h3>Submit an Edit</h3>
-
-          <label className='label'>Title</label>
-          <div className="control">
-            <input
-              onChange = {this.handleChange}
-              className="input"
-              name="title"
-
-              defaultValue={this.state.writing.title}/>
-          </div>
-          <label className='label'>Your Edit</label>
-          <div className="control">
-            <textarea
-              onChange = {this.handleChange}
-              type="text"
-              className="input"
-              name="text"
-              defaultValue= {this.state.writing.text}
-            />
-          </div>
-
-          <button type="submit" className="button" > Submit your edit. </button>
-
-
-        </form>
       </main>
 
     )

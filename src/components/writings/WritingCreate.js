@@ -10,7 +10,7 @@ class WritingCreate extends React.Component {
   constructor() {
     super()
 
-    this.state = { writing: null, data: { } }
+    this.state = { data: { } }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
@@ -44,26 +44,17 @@ class WritingCreate extends React.Component {
 
 
   render() {
-    if (!this.state.writing) return null
+
     console.log(this.state.data)
     // this.diff('human', 'humat')
-    const { writing } =  this.state
+
 
     return (
       <main>
-        <div className="titleContainer">
-          <h2 className="writingTitle">{writing.title}</h2>
-          <div className ="writing show">
 
-
-            <span key={writing.id}><h3 key={writing.id}> {writing.text}</h3></span>
-
-          </div>
-
-        </div>
         <form className="form-style" onSubmit={this.handleSubmit} >
 
-          <h3>Submit an Edit</h3>
+          <h3>Submit Some Writing</h3>
 
           <label className='label'>Title</label>
           <div className="control">
@@ -76,12 +67,13 @@ class WritingCreate extends React.Component {
           </div>
           <label className='label'>Your Writing</label>
           <div className="control">
-            <textarea
+            <textarea 
               onChange = {this.handleChange}
               type="text"
-              className="input"
+              className="submit-writing input"
               name="text"
               placeholder='Paste you writing here'
+              lines='150'
             />
           </div>
 

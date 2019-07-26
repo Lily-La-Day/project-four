@@ -5,9 +5,11 @@ import './style.scss'
 import WritingsIndex from './components/writings/writingsIndex'
 import EditCreate from './components/writings/EditCreate'
 import WritingCreate from './components/writings/WritingCreate'
-// import WritingShow from './components/writings/WritingShow'
+import WritingShow from './components/writings/WritingShow'
+import EditsShow from './components/writings/EditsShow'
 import Login from './components/Auth/Login'
-
+import Register from './components/Auth/Register'
+import Nav from './components/common/Nav'
 
 
 
@@ -17,10 +19,15 @@ const App = () => {
     <BrowserRouter>
       <main>
         <div>
+          <Nav />
           <Switch>
-            <Route path='/login' component={Login} />
-            {/* <Route path='/writings/:id/' component={WritingShow} /> */}
+            <Route path='/register' component={Register} />
+            <Route path='/writerlogin' component={Login} />
+            <Route path='/editorlogin' component={Login} />
+            <Route path='/writings/:id/edits' component={EditsShow} />
             <Route path='/writings/:id/edit' component={EditCreate} />
+            <Route path='/writings/:id/' component={WritingShow} />
+
             <Route path='/writingsubmit' component={WritingCreate} />
             <WritingsIndex />
           </Switch>

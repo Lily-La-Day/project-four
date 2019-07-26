@@ -33,10 +33,10 @@ class WritingsIndex extends React.Component {
 
           {this.state.writings.map((writing, i) => (
 
-            <div onMouseOver={this.colorChange}  key={i} className ="writing">
+            <div key={i} className ="writing">
 
               <Link to={`/writings/${writing.id}`}>
-                <span key={writing.id}><h3 key={writing.id}> {writing.text}</h3></span>
+                <span key={writing.id}><h3 key={writing.id}> {writing.title}</h3></span>
               </Link>
             </div>
 

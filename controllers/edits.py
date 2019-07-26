@@ -14,7 +14,7 @@ def index():
     return edit_schema.jsonify(edits, many=True), 200
 
 
-@api.route('/edits', methods=['edit'])
+@api.route('/edits', methods=['POST'])
 @secure_route_editor
 def create():
     data = request.get_json()
@@ -38,10 +38,18 @@ def showEdit(edit_id):
 @api.route('/writings/<int:writing_id>/edits', methods=['GET'])
 def showEdits(writing_id):
     edits = Edit.query.join(Edit.original).filter(Writing.id == writing_id).all()
-    for edit in edits:
-        Edit.query.get(edit.id)
-        return edit_schema.jsonify(edit), 200
-
+    print(edits)
     if not edits:
         return jsonify({'message': 'not found'}), 404
-    return edit_schema.jsonify(edits), 200
+    return edit_schema.jsonify(edits, many=True), 200
+
+
+@api.route('/writings/<int:writing_id>/edits/<int:edit_id>/like', methods=['POST'])
+@secure_route_editor
+def like(edit_id):
+    edit = Edit.query.get(edit_id)
+    if not edit:
+        return jsonify({'message': 'Not Found'}), 404
+    edit.liked_by.append(g.current_user)
+    edit.save()
+    return edit_schema.jsonify(edit), 201
