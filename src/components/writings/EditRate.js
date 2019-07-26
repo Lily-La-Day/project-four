@@ -20,23 +20,13 @@ class EditRate extends React.Component {
 
 
     this.starRating = this.starRating.bind(this)
-    this.submitRate = this.submitRate.bind(this)
+    this.rate = this.rate.bind(this)
 
 
 
   }
 
 
-
-
-  // componentDidMount() {
-  //   const edits = []
-  //
-  //   axios.get(`/api/writings/${this.props.writing}/edits`)
-  //
-  //     .then(res => this.setState({ edits: edits.concat(res.data) }))
-  //     .catch(err => console.log(err))
-  // }
 
   starRating(e) {
     const one = document.querySelector('.one')
@@ -45,7 +35,7 @@ class EditRate extends React.Component {
     const four = document.querySelector('.four')
     const five = document.querySelector('.five')
 
-    if(!this.state.rated)
+    if(!this.rated)
       if(e.target.classList.contains('one')){
 
         one.classList.toggle('starAfter')
@@ -84,9 +74,6 @@ class EditRate extends React.Component {
         // this.setState({ rated: true })
       }
     console.log(this.state.rating)
-
-
-
     document.querySelector('p').classList.remove('none')
 
 
@@ -94,7 +81,7 @@ class EditRate extends React.Component {
   }
 
   rate() {
-    this.setState({rating: this.state.rating})
+
     console.log(this.state.rating)
     console.log('rating')
     axios.post(`/api/edits/${this.props.edit.id}/like`, this.state,  {
@@ -103,40 +90,11 @@ class EditRate extends React.Component {
 
     })
       .catch((err) => console.log(err))
+    this.rated = true
+    document.querySelector('.thank-you').style.display = 'block'
   }
 
-  submitRate() {
 
-    switch(this.state.rating) {
-      case 1:
-        this.rate()
-        break
-      case 2:
-        this.rate()
-        this.rate()
-        break
-      case 3:
-        this.rate()
-        this.rate()
-        this.rate()
-        break
-      case 4:
-        this.rate()
-        this.rate()
-        this.rate()
-        this.rate()
-        break
-      case 5:
-        this.rate()
-        this.rate()
-        this.rate()
-        this.rate()
-        this.rate()
-        break
-      default:
-      // code block
-    }
-  }
 
 
 
@@ -147,55 +105,41 @@ class EditRate extends React.Component {
     if (!this.props.edit) return null
 
     console.log(this.props.edit)
-
-    // this.diff('human', 'humat')
-
-
     return (
       <main>
         <div className="edit-snippet-section">
 
           <h2 className="writingTitle">{this.props.edit.title}</h2>
           <h5 className="edit-snippet"> {this.props.edit.text}</h5>
-          <div className="content">
-            <h3>Rate This Edit</h3>
+          <div>
+            <div className="content">
+              <h3>Rate This Edit</h3>
 
-            <div className="wrapper">
-
-
-
-              <img src="/assets/star.svg" className="starBefore one"  onClick={this.starRating}/>
-              <img src="/assets/star.svg"  className="starBefore two" onClick={this.starRating}/>
-              <img src="/assets/star.svg"  className="starBefore three" onClick={this.starRating}/>
-              <img src="/assets/star.svg" className="starBefore four" onClick={this.starRating}/>
-              <img src="/assets/star.svg" className="starBefore five" onClick={this.starRating}/>
-
-              <p className='none star-text'> Click below to confirm your rating</p>
-
-              <button className="rateButton" onClick={this.submitRate}> rate </button>
+              <div className="wrapper">
+                <img src="/assets/star.svg" className="starBefore one"  onClick={this.starRating}/>
+                <img src="/assets/star.svg"  className="starBefore two" onClick={this.starRating}/>
+                <img src="/assets/star.svg"  className="starBefore three" onClick={this.starRating}/>
+                <img src="/assets/star.svg" className="starBefore four" onClick={this.starRating}/>
+                <img src="/assets/star.svg" className="starBefore five" onClick={this.starRating}/>
 
 
+              </div>
 
+
+            </div>
+
+
+            <div>
+              <p className='none star-text'> Click below to confirm your rating </p>
+              <button className="rateButton button" onClick={this.rate} > rate </button>
+              <h3 className="thank-you"> Thank you for rating! This edit currently has a rating of {this.props.edit.rating + this.state.rating}</h3>
             </div>
 
           </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </main>
+
 
     )
   }

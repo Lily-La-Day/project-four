@@ -46,6 +46,7 @@ class EditsShow extends React.Component {
           {this.state.edits.map((edit, i) => (
             <div key={i} >
               <EditRate edit={edit} writing={this.props.match.params.id}/>
+
             </div>
 
           ))}

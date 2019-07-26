@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, g
 from models.writing import Writing, WritingSchema
+from models.category import Category
 # from lib.helpers import is_unique
 from lib.secure_route import secure_route
 

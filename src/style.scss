@@ -193,6 +193,14 @@ margin-top: 100px;
 
 }
 
+.form{
+  white-space: pre-wrap;
+}
+
+.thank-you {
+  display: none;
+}
+
 
 
 .form-style{
@@ -380,7 +388,7 @@ grid-column: 1;
 }
 .wrapper {
   position: relative;
-  
+
   border: none;
   font-size: 14px;
   margin: 50px auto;
