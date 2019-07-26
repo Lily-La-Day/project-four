@@ -12,8 +12,16 @@ class EditsShow extends React.Component {
   constructor() {
     super()
 
-    this.state = { edits: []  }
+    this.state = { edits: [] , num: 0 }
+    this.addOne = this.addOne.bind(this)
 
+
+  }
+
+  addOne() {
+    let number = this.state.num
+    number += 1
+    this.setState({ num: number })
   }
 
 
@@ -44,12 +52,14 @@ class EditsShow extends React.Component {
       <main>
         <div className="edit-snippet-section">
           {this.state.edits.map((edit, i) => (
-            <div key={i} >
-              <EditRate edit={edit} writing={this.props.match.params.id}/>
+            <div key={i}>
+              { (this.state.num === i) &&
+              <EditRate edit={edit} writing={this.props.match.params.id}/> }
 
             </div>
 
           ))}
+          <button onClick={this.addOne}>Next edit</button>
 
 
 

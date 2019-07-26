@@ -44,11 +44,7 @@ class WritingCreate extends React.Component {
 
 
   render() {
-
     console.log(this.state.data)
-    // this.diff('human', 'humat')
-
-
     return (
       <main>
 
@@ -67,7 +63,7 @@ class WritingCreate extends React.Component {
           </div>
           <label className='label'>Your Writing</label>
           <div className="control">
-            <textarea 
+            <textarea
               onChange = {this.handleChange}
               type="text"
               className="submit-writing input"

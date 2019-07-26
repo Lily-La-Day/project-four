@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import axios from 'axios'
+import WritingsIndex from './WritingsIndex'
 
 
 
 
-class Search extends React.Component {
+class SearchIndex extends React.Component {
   constructor() {
     super()
     this.state = {
       query: '',
-      category: 0,
-      writings: []
+      category: null,
+      filteredWritings: null
 
     }
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -21,179 +22,189 @@ class Search extends React.Component {
     axios.get(`/api/categories/${this.state.category}`)
       .then((res) => {
         this.setState({
-          writings: res.data
+          filteredWritings: res.data.writings
         })
       })
+
   }
 
   setCategory(data) {
     switch(data) {
       case 'romantic':
-        this.setstate({
+        this.setState({
           category: 1
         })
         break
       case 'personal':
-        this.setstate({
+        this.setState({
           category: 2
         })
         break
       case 'business':
-        this.setstate({
+        this.setState({
           category: 3
         })
         break
       case 'formal':
-        this.setstate({
+        this.setState({
           category: 4
         })
         break
       case 'letters of complaint':
-        this.setstate({
+        this.setState({
           category: 5
         })
         break
       case 'work':
-        this.setstate({
+        this.setState({
           category: 6
         })
         break
       case 'cover letter':
-        this.setstate({
+        this.setState({
           category: 7
         })
         break
       case 'cv':
-        this.setstate({
+        this.setState({
           category: 8
         })
         break
       case 'family':
-        this.setstate({
+        this.setState({
           category: 9
         })
         break
       case 'thank you':
-        this.setstate({
+        this.setState({
           category: 10
         })
         break
       case 'application':
-        this.setstate({
+        this.setState({
           category: 11
         })
         break
       case 'feedback':
-        this.setstate({
+        this.setState({
           category: 12
         })
         break
       case 'prose':
-        this.setstate({
+        this.setState({
           category: 13
         })
         break
       case 'short story':
-        this.setstate({
+        this.setState({
           category: 14
         })
         break
       case 'obituary':
-        this.setstate({
+        this.setState({
           category: 15
         })
         break
       case 'journalism':
-        this.setstate({
+        this.setState({
           category: 16
         })
         break
       case 'poetry':
-        this.setstate({
+        this.setState({
           category: 17
         })
         break
       case 'formal communication':
-        this.setstate({
+        this.setState({
           category: 18
         })
         break
       case 'enquiry':
-        this.setstate({
+        this.setState({
           category: 19
         })
         break
       case 'suggestion':
-        this.setstate({
+        this.setState({
           category: 20
         })
         break
       case 'criticism':
-        this.setstate({
+        this.setState({
           category: 21
         })
         break
       case 'blog':
-        this.setstate({
+        this.setState({
           category: 22
         })
         break
       case 'fan fiction':
-        this.setstate({
+        this.setState({
           category: 23
         })
         break
       case 'appreciation':
-        this.setstate({
+        this.setState({
           category: 24
         })
         break
       case 'branding':
-        this.setstate({
+        this.setState({
           category: 25
         })
         break
       case 'press release':
-        this.setstate({
+        this.setState({
           category: 26
         })
         break
+      default:
+        this.setState({
+          category: ''
+        })
+
 
     }
+    this.getInfo()
+
 
   }
 
   handleInputChange(e) {
     e.preventDefault()
-
     console.log(this.state.query, this.state.category)
     this.setState({
       query: this.search.value
     }, () => {
       if (this.state.query && this.state.query.length > 1) {
-        if (this.state.query.length % 2 === 0) {
-          this.setCategory(this.state.query)
-          this.getInfo()
+        this.setCategory(this.state.query)
 
-
-        }
       }
     })
+
+
   }
 
   render() {
-    console.log(this.state.writings)
+    if(this.state.category) {
+      this.getInfo()
+    }
     return (
-      <form>
-        <input
-          placeholder="Search writing categories..."
-          ref={input => this.search = input}
-          onChange={this.handleInputChange}
-        />
-        <p>{this.state.query}</p>
-      </form>
+      <main>
+        <form>
+          <input
+            placeholder="Search writing categories..."
+            ref={input => this.search = input}
+            onChange={this.handleInputChange}
+          />
+          <p>{this.state.query}</p>
+        </form>
+        <WritingsIndex filteredWritings={this.state.filteredWritings} category={this.state.category} />
+      </main>
     )
   }
 }
 
-export default Search
+export default SearchIndex

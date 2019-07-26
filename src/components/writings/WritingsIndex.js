@@ -22,14 +22,16 @@ class WritingsIndex extends React.Component {
 
 
   render() {
-
+    console.log(this.props.filteredWritings)
     if (!this.state.writings) return null
     console.log(this.state.writings)
 
     return (
+
       <main>
 
-        <div className="grid-container">
+
+        { !this.props.category && <div className="grid-container">
 
           {this.state.writings.map((writing, i) => (
 
@@ -42,7 +44,21 @@ class WritingsIndex extends React.Component {
 
           ))}
 
-        </div>
+        </div> }
+        {this.props.filteredWritings && <div className="grid-container">
+
+          {this.props.filteredWritings.map((writing, i) => (
+
+            <div key={i} className ="writing">
+
+              <Link to={`/writings/${writing.id}`}>
+                <span key={writing.id}><h3 key={writing.id}> {writing.title}</h3></span>
+              </Link>
+            </div>
+
+          ))}
+
+        </div> }
 
 
 

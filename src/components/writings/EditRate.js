@@ -92,6 +92,7 @@ class EditRate extends React.Component {
       .catch((err) => console.log(err))
     this.rated = true
     document.querySelector('.thank-you').style.display = 'block'
+    document.querySelector('.rateButton').style.display = 'none'
   }
 
 
@@ -107,36 +108,36 @@ class EditRate extends React.Component {
     console.log(this.props.edit)
     return (
       <main>
-        <div className="edit-snippet-section">
-
-          <h2 className="writingTitle">{this.props.edit.title}</h2>
-          <h5 className="edit-snippet"> {this.props.edit.text}</h5>
-          <div>
-            <div className="content">
-              <h3>Rate This Edit</h3>
-
-              <div className="wrapper">
-                <img src="/assets/star.svg" className="starBefore one"  onClick={this.starRating}/>
-                <img src="/assets/star.svg"  className="starBefore two" onClick={this.starRating}/>
-                <img src="/assets/star.svg"  className="starBefore three" onClick={this.starRating}/>
-                <img src="/assets/star.svg" className="starBefore four" onClick={this.starRating}/>
-                <img src="/assets/star.svg" className="starBefore five" onClick={this.starRating}/>
 
 
-              </div>
+        <h2 className="writingTitle">{this.props.edit.title}</h2>
+        <h5 className="edit-snippet"> {this.props.edit.text}</h5>
+        <div>
+          <div className="content">
+            <h3>Rate This Edit</h3>
+
+            <div className="wrapper">
+              <img src="/assets/star.svg" className="starBefore one"  onClick={this.starRating}/>
+              <img src="/assets/star.svg"  className="starBefore two" onClick={this.starRating}/>
+              <img src="/assets/star.svg"  className="starBefore three" onClick={this.starRating}/>
+              <img src="/assets/star.svg" className="starBefore four" onClick={this.starRating}/>
+              <img src="/assets/star.svg" className="starBefore five" onClick={this.starRating}/>
 
 
             </div>
 
-
-            <div>
-              <p className='none star-text'> Click below to confirm your rating </p>
-              <button className="rateButton button" onClick={this.rate} > rate </button>
-              <h3 className="thank-you"> Thank you for rating! This edit currently has a rating of {this.props.edit.rating + this.state.rating}</h3>
-            </div>
 
           </div>
+
+
+          <div className="rating-container">
+            <p className='none star-text'> Click below to confirm your rating </p>
+            <button className="rateButton button" onClick={this.rate} > rate </button>
+            <h3 className="thank-you"> Thank you for rating! This edit currently has a rating of {this.props.edit.rating + this.state.rating}</h3>
+          </div>
+
         </div>
+
 
       </main>
 

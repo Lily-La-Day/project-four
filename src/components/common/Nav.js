@@ -27,7 +27,7 @@ class Nav extends React.Component {
         {!Auth.isAuthenticated() && <Link to="/login" className="nav-item nav-two">Log In</Link>}
         {Auth.isAuthenticated() && <Link to="/" className="nav-item nav-four" onClick={() => Auth.logout()}>Log Out</Link>}
         {Auth.isAuthenticated() && <Link to="/submit" className="nav-item nav-four"></Link>}
-        <Link to="/" className="nav-item nav-three">The Writings</Link>
+        <Link to="/writings" className="nav-item nav-three">The Writings</Link>
 
 
 

@@ -11,7 +11,7 @@ class WritingShow extends React.Component {
   constructor() {
     super()
 
-    this.state = { writing: null, edits: [] }
+    this.state = { writing: null, edits: null }
 
 
 
@@ -50,14 +50,15 @@ class WritingShow extends React.Component {
 
   render() {
     if (!this.state.writing) return null
-    if (!this.state.edits) return null
+    
 
-    console.log(this.state.edits)
+    console.log('edits', this.state.edits)
     console.log(typeof this.state.edits)
     // this.diff('human', 'humat')
 
 
     return (
+
       <main>
         <div className="writingcontainer">
 
@@ -69,10 +70,10 @@ class WritingShow extends React.Component {
 
 
 
-
+          {this.state.edits &&
           <Link to={`/writings/${this.state.writing.id}/edits`}>
             <button className="edits-button"> See Submitted Edits </button>
-          </Link>
+          </Link>}
 
         </div>
 
