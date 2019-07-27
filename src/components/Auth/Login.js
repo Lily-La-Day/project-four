@@ -48,18 +48,6 @@ class Login extends React.Component {
       .catch(() => this.setState({ error: 'Invalid Crendentials'}))
   }
 
-  // makeChoice(e) {
-  //
-  //   if(e.target.classList.contains('editor')) {
-  //     console.log(e.target.innerHTML)
-  //     this.setState({ type: 'editor' })
-  //   }else if(e.target.classList.contains('writer')){
-  //     this.setState({ type: 'writer' })
-  //   }
-
-  //   document.querySelectorAll('.choice').forEach(el => el.style.display = 'none')
-  //
-  // }
 
 
   render(){

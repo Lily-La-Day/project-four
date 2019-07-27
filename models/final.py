@@ -1,6 +1,8 @@
 from app import db, ma
 from marshmallow import fields
 from .writingbase import WritingBaseModel
+from .edit import Edit, EditSchema
+from .editor import EditorSchema, Editor
 from .base import BaseSchema
 
 
@@ -9,6 +11,7 @@ from .base import BaseSchema
 class Final(db.Model, WritingBaseModel):
 
     __tablename__ = 'finals'
+
 
     edit_id = db.Column(db.Integer, db.ForeignKey('edits.id'))
     edit = db.relationship('Edit', backref='created_edits')
@@ -21,4 +24,4 @@ class FinalSchema(ma.ModelSchema, BaseSchema):
     class Meta:
         model = Final
 
-    edit = fields.Nested('EditSchema', only=('id', ))
+    edit = fields.Nested('EditSchema')

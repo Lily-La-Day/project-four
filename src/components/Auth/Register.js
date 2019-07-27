@@ -53,7 +53,7 @@ class Register extends React.Component {
       <main className="section">
 
         <section className="container">
-          <button className="choice writer" onClick={this.makeChoice}>Sign-Up to Write </button>  <button className="choice editor" onClick={this.makeChoice}>Sign-Up to Edit </button>
+          <button className="choice writer" onClick={this.makeChoice}>Sign-Up to Write </button>  <button className="choice editor" onClick={this.makeChoice}></button>
           {(this.state.type === 'writer') &&  <form className="register form-style" onSubmit={this.handleSubmitWriter} >
 
             <div className="field">
