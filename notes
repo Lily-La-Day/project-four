@@ -1,0 +1,161 @@
+Models -
+
+Writings
+
+Edited Writings
+
+@channel steps for homework tonight:
+
+0 - Follow the steps along in the textbook!
+
+1. Use pipenv to install flask
+2. Create an `app.py` file
+3. Create a `.env` file
+4. In `.env`
+ - Set FLASK_ENV to development
+ - Set FLASK_SKIP_DOTENV to 1
+
+5. In `app.py` - set up a basic ‘Hello World’ flask app to test that it is running correctly
+- Import flask
+- Start app
+- Set up a route for ‘/’
+- Write a function that returns ‘Hello World’ and a status of 200
+- Test this by running flask in terminal and making a request to ‘/’ in insomnia
+
+-------------------------- Continue from here for homework -------------------------
+
+6. Install flask-sqlalchemy psycopg2-binary
+7. In terminal, create a database (`createdb db_name`)
+8. In `app.py`
+- Import flask sqlalchemy to `app.py`
+- Set up config (‘SQLALCHEMY_DATABASE_URI’ and ‘SQLALCHEMY_TRACK_MODIFICATIONS’)
+- attach SQLAlchemy functionality to variable called db
+
+9. Create a directory called models and a file for the model
+ - Import db from app
+ - Build a class using db.Model
+ - Remember to set the __tablename__
+ - Define the shape of the model (the fields) - you MUST have an id that is the primary key
+
+10. Make a `seeds.py` file
+ - Import app and db
+ - Import the Cat model
+ - Use flask’s app_context() function to:
+    - Drop all tables in the db
+    - Create all tables in the db
+ - Create some entries for your database
+ - Remember to add each model to the db
+ - Finally commit to the db
+- _This step was left out before:_ Then seed your database
+ - At this point you can use TablePlus to check that your entries exist in the table in the db
+
+*11. Ask Gae to bring you some ice cream during your homework break*
+
+12. Install marshmallow-sqlalchemy and flask-marshmallow
+13. In `app.py`
+ - Import marshmallow-sqlalchemy and flask-marshmallow
+ - attach Marshmallow functionality to variable called ma
+14. In your model file
+ - Add ‘ma’ to your import from app
+ - Create a schema for your model using ma.
+15. In `app.py`
+ - Import your resource model (Cat) and resource schema (CatSchema)
+ - Invoke schema so it is ready to be used
+ - Set up a route for your resource (‘/cats’)
+ - Write an index function that queries the database for all cats and returns jsonified cats using the schema
+ - Test with insomnia (edited)
+
+. Set up the environment
+ - Make config directory
+ - Create an `environment.py` file inside config
+ - Refactor `app.py` to import environment and update database uri
+
+
+2. Create the base model
+ - Remember your imports - don’t forget marshmallow fields
+ - Build the base model and schema
+ - Go to the model for your resource (e.g. cats) and import the base model and schema and ‘mix’ them into your resource model and schema
+
+
+3. SEED and TEST!!!
+
+
+4. Refactor into controllers
+ - Delete the index route from `app.py`
+ - Make a controllers directory
+ - Make a file for your resource (e.g. `cats.py`)
+ - Import Blueprint from flask
+ - Register Blueprint
+ - Import your resource model and schema
+ - Replicate the index route (from `app.py`) and hook it up to the api.route
+
+5. Router
+ - In the config directory, make a `router.py` file
+ - Import app and your controllers
+ - Register the blueprint
+
+6. Import router from config into `app.py`
+
+7. TEST!!!
+
+
+8. Do the rest of the routes - show, create, update, delete
+ - Remember to import jsonify, request from flask
+
+ HOMEWORK:
+- Make sure that the full CRUD cycle exists for your main resource (yesterday’s homework)
+- Add in comment create and delete if you haven’t done so already
+- Add in the authentication functionality (register, login, secure route)
+
+BONUS:
+- Do it ALL again from the beginning with a different resource/theme (but I’ll only be looking at one for feedback, not both :fearful:)
+
+
+1. Install bcrypt and pyjwt
+
+2. In app
+ - import bcrypt
+ - hook up bcrypt
+
+3. Add the secret to config/environment.py
+
+4. Create models/user.py
+ - Import datetime, timedelta
+ - Import jwt
+ - Import hybrid property from sqlalchemy
+ - Import validates_schema, ValidationError, fields from marshmallow
+ - Import db, ma, bcrypt from app
+ - Import config
+
+ - Make user Model with password, email, password_hash
+ - Setup hybrid_property for password
+ - Setup password_setter
+ - Write validate_password and generate_token functions
+
+5. Create the user schema
+ - Use validates_schema from marshmallow and make a check_passwords_match function
+ - Add in the password and password_confirmation fields
+ - Register to Meta class - remember to exclude the password_hash (and don’t forget the trailing comma!)
+
+6. Update seeds to create user(s)
+ - SEED! TEST! (Check in TablePlus to make sure that they have been created)
+
+7. Create auth.py in controllers
+ - Import Blueprint, jsonify, request from flask
+ - Import user model and schema
+ - In router.py register a blueprint for auth
+ - Setup Blueprint in auth.py
+ - Invoke schema
+ - Create register and login routes and functions
+ - TEST with insomnia
+
+
+7. Create lib directory and secure_route.py inside it
+ - Import wraps from functools
+ - Import jwt
+ - Import request, jsonify, q from flask
+ - Import the User model
+ - Import the secret from config.environment
+ - Write the secure_route decorator
+
+8. Go back to the controllers and add in the secure_route decorator for routes that should be secure (edited)

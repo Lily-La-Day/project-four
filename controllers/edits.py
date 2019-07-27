@@ -48,13 +48,13 @@ def showEdits(writing_id):
         return jsonify({'message': 'not found'}), 404
     return edit_schema.jsonify(edits, many=True), 200
 
-@api.route('/writings/<int:writing_id>/edits/<int:edit_id>', methods=['GET'])
-def showSingleEdit(writing_id, edit_id):
-    edit = Edit.query.join(Edit.original).filter(Writing.id == writing_id).all().query.get(edit_id)
-
-    if not edit:
-        return jsonify({'message': 'not found'}), 404
-    return edit_schema.jsonify(edit), 200
+# @api.route('/writings/<int:writing_id>/edits/<int:edit_id>', methods=['GET'])
+# def showSingleEdit(writing_id, edit_id):
+#     edit = Edit.query.join(Edit.original).filter(Writing.id == writing_id).all()
+#
+#     if not edit:
+#         return jsonify({'message': 'not found'}), 404
+#     return edit_schema.jsonify(edit), 200
 
 
 @api.route('/edits/<int:edit_id>/like', methods=['POST'])

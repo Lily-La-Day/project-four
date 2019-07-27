@@ -1,5 +1,13 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, g
 from models.writer import Writer, WriterSchema
+from lib.secure_route import secure_route
+# from models.edit import Edit, EditSchema
+from models.writing import Writing
+
+
+
+api = Blueprint('edits', __name__)
+
 
 
 api = Blueprint('writers', __name__)
@@ -34,3 +42,24 @@ def login():
 def index():
     writers = Writer.query.all()
     return writer_schema.jsonify(writers, many=True), 200
+
+@api.route('/writerprofile', methods=['GET'])
+@secure_route
+def profile():
+    return writer_schema.jsonify(g.current_writer), 200
+
+
+# @api.route('/writerprofile/<int:writer_id>', methods=['GET'])
+# @secure_route
+# def profile_edits(writer_id):
+#     edits = Edit.query.join(Edit.original).filter(Writing.author['id']== writer_id).all()
+#     print(edits)
+#     if not edits:
+#         return jsonify({'message': 'not found'}), 404
+#     return edit_schema.jsonify(edits, many=True), 200
+
+
+# @api.route('/writerprofile', methods=['GET'])
+# @secure_route
+# def ownWritings():
+#     return writer_schema.jsonify(g.current_writer), 200

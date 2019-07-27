@@ -50,7 +50,7 @@ class WritingShow extends React.Component {
 
   render() {
     if (!this.state.writing) return null
-    
+
 
     console.log('edits', this.state.edits)
     console.log(typeof this.state.edits)
@@ -71,7 +71,7 @@ class WritingShow extends React.Component {
 
 
           {this.state.edits &&
-          <Link to={`/writings/${this.state.writing.id}/edits`}>
+          <Link to={`/writings/${this.state.writing.id}/edits/${this.state.edit.id}`}>
             <button className="edits-button"> See Submitted Edits </button>
           </Link>}
 

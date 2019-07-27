@@ -33,4 +33,4 @@ class EditSchema(ma.ModelSchema, BaseSchema):
 
     editor = fields.Nested('EditorSchema', only=('id', 'username'))
     liked_by = fields.Nested('EditorSchema', many=True, only=('id', 'username'))
-    original = fields.Nested('WritingSchema', only=('id', ))
+    original = fields.Nested('WritingSchema', )
