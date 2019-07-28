@@ -192,13 +192,16 @@ class SearchIndex extends React.Component {
       this.getInfo()
     }
     return (
-      <main>
-        <form>
+      <main className="wrap">
+        <form className="search">
           <input
             placeholder="Search writing categories..."
             ref={input => this.search = input}
             onChange={this.handleInputChange}
           />
+          <button type="submit" className="searchButton">
+            <i className="fa fa-search"></i>
+          </button>
           <p>{this.state.query}</p>
         </form>
         <WritingsIndex filteredWritings={this.state.filteredWritings} category={this.state.category} />

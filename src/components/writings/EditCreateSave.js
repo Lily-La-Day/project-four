@@ -6,16 +6,14 @@ const Diff = require('diff')
 
 
 
-
 class EditCreate extends React.Component {
   constructor() {
     super()
 
-    this.state = { writing: null, data: { }, text: [], word: '' }
+    this.state = { writing: null, data: { }, text: [] }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.makeArray = this.makeArray.bind(this)
-    this.setWord = this.setWord.bind(this)
 
 
   }
@@ -33,7 +31,24 @@ class EditCreate extends React.Component {
     console.log('working')
   }
 
-
+  // makeArray(e) {
+  //   const text = [e.target.value.split(' ')]
+  //   console.log(typeof text)
+  //   const textArray = text[0]
+  //   textArray.map((word) => {
+  //     const span = document.createElement('span')
+  //
+  //     span.textContent = word
+  //     console.log(word)
+  //     console.log(word.length)
+  //
+  //
+  //
+  //   })
+  //   console.log()
+  //   console.log(event.target.selectionStart)
+  //
+  // }
 
   makeArray() {
 
@@ -44,7 +59,7 @@ class EditCreate extends React.Component {
 
       span.textContent = `${word} `
       word = span
-
+      console.log(word)
 
 
 
@@ -56,16 +71,6 @@ class EditCreate extends React.Component {
 
     // console.log()
     // console.log(event.target.selectionStart)
-
-  }
-
-  getWords() {
-    axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.word}`,  {
-      headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800'}
-    })
-      .then((res) => {
-        console.log(res.data)
-      })
 
   }
 
@@ -84,55 +89,40 @@ class EditCreate extends React.Component {
       .catch((err) => console.log(err))
   }
 
-  setWord(e) {
-    this.setState({word: e.target.innerText})
-
-  }
-
 
   componentDidMount() {
     axios.get(`/api/writings/${this.props.match.params.id}`)
       .then(res => this.setState({ writing: res.data, original: { id: res.data.id } }))
       .catch(err => console.log(err))
 
-
-
-
   }
 
   diff(oldStr, newStr){
     console.log(Diff.diffChars(oldStr, newStr))
   }
-  log(e) {
-    console.log(e.target.value.innerText)
-  }
+
 
   render() {
     if (!this.state.writing) return null
 
-    {this.state.word && this.getWords()}
+
 
     // this.diff('human', 'humat')
     const { writing } =  this.state
 
     return (
-
-      <main >
-        <div className="edit-container" onMouseOver={this.makeArray}>
+      <main onClick={(e) => console.log(e.target)}>
+        <div className="edit-container">
           <div className ="original">
-            <div>
-              <h2 className="original-title">{writing.title}</h2>
+            <h2 className="original-title">{writing.title}</h2>
 
-              <div className="writings-container scroll" >
-                {this.state.text.map((word, i) => <p key={i} onClick={this.setWord} className="words">{word}</p>)}
 
-              </div>
 
-            </div>
+            <h5 key={writing.id}> {writing.text}</h5>
 
           </div>
 
-
+          {this.state.text.map(word => <p>{word}</p>)}
           <form className="form-style create-edit" onSubmit={this.handleSubmit}  >
 
             <h3>Submit an Edit</h3>
@@ -153,9 +143,9 @@ class EditCreate extends React.Component {
                 type="text"
                 className="submit-writing input"
                 name="text"
-
-                defaultValue= {this.state.writing.text}
-
+                onMouseOver={this.makeArray}
+                defaultValue= {this.state.text}
+                onClick = {(e) => console.log(e.target.value)}
 
 
               />

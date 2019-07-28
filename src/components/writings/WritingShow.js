@@ -35,10 +35,16 @@ class WritingShow extends React.Component {
 
 
   componentDidMount() {
-    const edits = []
+
     axios.get(`/api/writings/${this.props.match.params.id}`)
       .then(res => this.setState({ writing: res.data }))
       .catch(err => console.log(err))
+    this.getEdits()
+
+  }
+
+  getEdits() {
+    const edits = []
     axios.get(`/api/writings/${this.props.match.params.id}/edits`)
 
       .then(res => this.setState({ edits: edits.concat(res.data) }))
