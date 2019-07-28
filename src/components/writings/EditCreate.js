@@ -11,18 +11,39 @@ class EditCreate extends React.Component {
   constructor() {
     super()
 
-    this.state = { writing: null, data: { }, text: [], word: '', wordData: [], textTwo: '' }
+    this.state = { writing: null, data: { }, autoWordData: [], text: [], word: '', wordData: [], textTwo: '', query: '', highlighted: '' }
     this.handleChange = this.handleChange.bind(this)
     // this.handleChangeText = this.handleChangeText.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.makeArray = this.makeArray.bind(this)
     this.setWord = this.setWord.bind(this)
     this.stateCheck = this.stateCheck.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.matchWord = this.matchWord.bind(this)
+    this.autoGetWords = this.autoGetWords.bind(this)
 
 
   }
 
+
+  handleInputChange(e) {
+    e.preventDefault()
+
+    this.setState({
+      query: this.search.value
+    })
+
+
+
+
+  }
+
+
+
+
   handleChange({ target: { name, value }}) {
+
+
 
     let text = []
 
@@ -34,19 +55,43 @@ class EditCreate extends React.Component {
 
     this.setState({ textTwo: text })
 
+    this.setState({
+      query: text[text.length - 2]
+    })
+
+    console.log('state query', this.state.query)
+
+
+
+
 
 
   }
 
-  // handleChangeText(e)  {
+  matchWord(e) {
+    if(this.state.textTwo.length > 3) {
+      if(e.keyCode == 32){
+        console.log('query', this.state.query)
+        const comparison = this.state.query.split(' ')
+        const comparisonTwo = [this.state.query]
+        console.log('comparison', comparison[0], comparisonTwo)
+        console.log(this.state.textTwo.forEach((word) => {
+          if(word.length > 1 && word == this.state.query) {
+
+            console.log('match:', word)
+            document.querySelector(`.${word}`).classList.add('highlighted')
+          }
+
+        }))
+        this.setState({
+          query: ''
+        })
+      }
+    }
+
+  }
   //
-  //   const text = {text: e.target.value }
-  //
-  //   console.log(text)
-  //
-  //   this.setState({ textTwo: text })
-  //
-  // }
+  // word.length > 1 && word == comparison[0] ||
 
 
 
@@ -62,18 +107,9 @@ class EditCreate extends React.Component {
 
       span.textContent = `${word} `
       word = span
-
-
-
-
-
-
     })
 
     this.setState({ text: text })
-
-    // console.log()
-    // console.log(event.target.selectionStart)
 
   }
 
@@ -86,6 +122,23 @@ class EditCreate extends React.Component {
         this.setState({wordData: res.data.results})
         console.log(res.data.results[0].synonyms)
       })
+
+  }
+
+  autoGetWords(e) {
+
+    if(e.keyCode == 32){
+
+      axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.query}`,  {
+        headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800'}
+      })
+        .then((res) => {
+          this.setState({autoWordData: res.data.results})
+          console.log(res.data.results[0].synonyms)
+        })
+      // document.querySelectorAll('p').forEach(el => el.classList.remove('highlighted'))
+    }
+
 
   }
 
@@ -135,7 +188,7 @@ class EditCreate extends React.Component {
 
   render() {
     if (!this.state.writing) return null
-
+    console.log(this.state.wordData)
 
     const { writing } =  this.state
 
@@ -148,11 +201,12 @@ class EditCreate extends React.Component {
               <h2 className="original-title">{writing.title}</h2>
 
               <div className="writings-container scroll" >
-                {!this.state.textTwo &&  this.state.text.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className="words">{word}</p>)}
-                {this.state.textTwo && this.state.textTwo.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className="words">{word}</p>)}
+                {!this.state.textTwo &&  this.state.text.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className="words highlighted">{word}</p>)}
+                {this.state.textTwo && this.state.textTwo.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className={word} >{word}</p>)}
               </div>
               <div className="container" >
-                {this.state.word && this.state.wordData && this.state.wordData.map((word, i) => <p>{word.definition}</p>)}
+                {this.state.word && this.state.wordData && this.state.wordData.map((word, i) => <p key={i}>{word.definition}</p>)}
+                {this.state.autoWordData && this.state.autoWordData.map((word, i) => <p key={i}>{word.definition}</p>)}
 
               </div>
 
@@ -192,6 +246,8 @@ class EditCreate extends React.Component {
                 name="text"
 
                 defaultValue= {this.state.writing.text}
+                onKeyDown={this.matchWord}
+                onKeyUp={this.autoGetWords}
 
 
 
@@ -202,6 +258,18 @@ class EditCreate extends React.Component {
             <button type="submit" className="button" > Submit your edit. </button>
 
 
+          </form>
+          <form className="search">
+            <input
+              placeholder="Search writing categories..."
+              ref={input => this.search = input}
+              onChange={this.handleInputChange}
+              onKeyUp={this.matchWord}
+            />
+            <button type="submit" className="searchButton">
+              <i className="fa fa-search"></i>
+            </button>
+            <p>{this.state.query}</p>
           </form>
         </div>
       </main>

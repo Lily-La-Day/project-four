@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
 import { Link } from 'react-router-dom'
+import EditsShow from './EditsShow'
 
 
 
@@ -11,8 +12,9 @@ class WritingShow extends React.Component {
   constructor() {
     super()
 
-    this.state = { writing: null, edits: null }
+    this.state = { writing: null, edits: null, seeTheEdits: false }
 
+    this.seeEdit = this.seeEdit.bind(this)
 
 
   }
@@ -31,6 +33,12 @@ class WritingShow extends React.Component {
         this.props.history.push('/writings')
       })
       .catch((err) => console.log(err))
+  }
+
+
+  seeEdit() {
+    this.setState({ seeTheEdits: true })
+    console.log(this.see)
   }
 
 
@@ -66,22 +74,24 @@ class WritingShow extends React.Component {
     return (
 
       <main>
-        <div className="writingcontainer">
+        {!this.state.seeTheEdits && <div className="writingcontainer">
 
-          <h2 className="writingTitle">{this.state.writing.title}</h2>
 
-          <p key={this.state.writing.id} > {this.state.writing.text}</p>
+      <h2 className="writingTitle">{this.state.writing.title}</h2>
+
+          <p  className="writing-show" key={this.state.writing.id} > {this.state.writing.text}</p>
 
           <Link to={`/writings/${this.state.writing.id}/edit`}> <button className="edit-button"> Edit </button></Link>
 
+  </div>}
+  <div className="show-edit-container">
+          {this.state.edits && !this.state.seeTheEdits &&  <button onClick={this.seeEdit} className="show-button"> See Submitted Edits </button>}
+
+          {this.state.seeTheEdits && <EditsShow edits={this.state.edits} writing={this.state.writing}/>}
 
 
-          {this.state.edits &&
-          <Link to={`/writings/${this.state.writing.id}/edits/${this.state.edit.id}`}>
-            <button className="edits-button"> See Submitted Edits </button>
-          </Link>}
 
-        </div>
+      </div>
 
 
       </main>

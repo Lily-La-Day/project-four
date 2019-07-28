@@ -6,7 +6,7 @@ import './style.scss'
 import EditCreate from './components/writings/EditCreate'
 import WritingCreate from './components/writings/WritingCreate'
 import WritingShow from './components/writings/WritingShow'
-import EditsShow from './components/writings/EditsShow'
+// import EditsShow from './components/writings/EditsShow'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 import WriterProfile from './components/Auth/WriterProfile'
@@ -24,8 +24,8 @@ const App = () => {
         <div>
           <Nav />
           <Switch>
-            <Route path='/writings/:id/edits/edit:id' component={EditsShow} />
-            <Route path='/writings/:id/edits' component={EditsShow} />
+            {/* <Route path='/writings/:id/edits/edit:id' component={EditsShow} /> */}
+            {/* <Route path='/writings/:id/edits' component={EditsShow} /> */}
             <Route path='/writings/:id/edit' component={EditCreate} />
             <Route path='/writings/:id/' component={WritingShow} />
             <Route path='/writingsubmit' component={WritingCreate} />

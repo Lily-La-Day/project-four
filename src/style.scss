@@ -20,12 +20,15 @@ body {
 background-size: cover;
   padding: 5%;
   height: 100vh;
-background-image: url('./assets/background.svg');
+
+  overflow: scroll !important;
 
 }
 
+
+
 main {
-  height: 100vh;
+  height: 80%;
 }
 
 [class*="edits"] {
@@ -88,8 +91,8 @@ h1 {
 
 .writingcontainer {
   display: grid;
-  height: 100vh;
-  width: 90%;
+align-content: center;
+align-content: center;
   grid-template-columns: repeat(1, 1fr);
 
   justify-content: center;
@@ -126,13 +129,19 @@ margin-top: 100px;
 }
 
 
-
+.show-edit-container {
+  height: 25vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
 
 .edit-container {
   display: grid;
   grid-template-columns: repeat(2, 50%);
   align-items: center;
   grid-column-gap: 5%;
+
 }
 .create-edit {
   grid-column: 2;
@@ -163,9 +172,9 @@ margin-top: 100px;
 .writer {
 
   color: black;
-  grid-row: 3;
-  grid-column: 2;
-  font-family: 'Coming Soon', cursive;
+
+grid-column: 2;
+grid-row: 2;
   font-size: 1.5em;
   justify-self: start;
   background-color: transparent;
@@ -173,16 +182,46 @@ margin-top: 100px;
   box-shadow: none;
 }
 
-.editor {
-  grid-row: 3;
-  grid-column: 3;
+.own-edits {
+  text-align: center;
+  font-size: 1.5em;
+}
 
-  background-image: url('./assets/edit-sign-up.svg');
+h3 {
+  text-align: center;
+}
+
+.next-edit {
+
+  justify-self: center;
+}
+
+.make-final {
+  display: grid;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 2em;
+}
+
+.editor {
+  grid-column: 3;
+  grid-row: 2;
+
   font-size: 1.5em;
 
   background-color: transparent;
   border: 0px;
   box-shadow: none;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.writing-show {
+  margin-left: 25%;
+  margin-right: 25%;
+  font-weight: bolder;
 }
 
 
@@ -191,10 +230,10 @@ margin-top: 100px;
 
 
 .writingTitle, h2 {
-  align-self: end;
+margin-top: 15%;
   padding: 0;
-  margin: 0;
-
+margin-left: 25%;
+margin-right: 25%;
   grid-row: 1;
   text-align: center;
   justify-items: center;
@@ -210,6 +249,8 @@ margin-top: 100px;
   height: 100vh;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
+  align-content: center;
+  justify-self: center;
 }
 
 .register {
@@ -220,7 +261,7 @@ margin-top: 100px;
   background-color: white;
   padding: 5%;
   font-size: 1.1em;
-  font-family: 'Special Elite', cursive;
+
   background-color: transparent;
 
 
@@ -363,7 +404,7 @@ margin-top: 100px;
 
 }
 
-.edit-button {
+.edit-button, .show-button {
   display: grid;
 justify-self: center;
 grid-column: 1;
@@ -606,10 +647,24 @@ color: black;
   padding-right: 15%;
 }
 
+.index-writing-show {
+height: 500px;
+  overflow: scroll;
+}
+
 .show-writing-button {
+  margin-top: -50em;
   margin-left: 15%;
   margin-right: 15%;
 
+}
+
+.highlighted {
+  background-color: yellow;
+}
+
+.hidden {
+  display: none;
 }
 
   //

@@ -41,7 +41,7 @@ class FinalShow extends React.Component {
 
       <main>
         <div className="writingcontainer">
-
+<h1>The Final Version</h1>
           <h2 className="writingTitle">{this.state.final.title}</h2>
 
           <p> {this.state.final.text}</p>

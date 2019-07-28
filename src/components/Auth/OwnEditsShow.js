@@ -14,7 +14,7 @@ class OwnEditsShow extends React.Component {
   constructor() {
     super()
 
-    this.state = {  num: 0, final: null, confirmation: false }
+    this.state = {  num: 0, final: null, confirmation: false  }
     this.addOne = this.addOne.bind(this)
     this.minusOne = this.minusOne.bind(this)
     this.selectFinal = this.selectFinal.bind(this)
@@ -82,24 +82,27 @@ class OwnEditsShow extends React.Component {
                 <section className="own-edits">
                   <h4>{edit.title}</h4>
                   <h6>{edit.text}</h6>
-                  {edit.rating && <h2>{edit.rating}</h2>}
-
-                </section>
+                  {edit.rating &&
 
 
+      <h2>{edit.rating} </h2>}
+{!this.state.final && <button className="make-final" onClick={() => this.selectFinal(edit)}>Make Final</button>}
+</section>
 
-              }
 
-              {!this.state.final && <button onClick={() => this.selectFinal(edit)}>Make Final</button>}
-              {this.state.final && <button onClick={() => this.confirmFinal(edit)}>Are you sure!? Once you confirm
+
+}
+
+
+              {this.state.final && <button className="make-final" onClick={() => this.confirmFinal(edit)}>Are you sure!? Once you confirm
             it is confirmed!</button>}
 
             </div>
 
           ))}
 
-          <button onClick={this.addOne}>Next Edit</button>
-          <button onClick={this.minusOne}>Last Edit</button>
+        {this.state.num < this.props.edits.length &&  <button className="next-edit" onClick={this.addOne}>Next Edit</button>}
+        {this.state.num > 0 && <button className="next-edit" onClick={this.minusOne}>Last Edit</button>}
 
         </div>}
         {this.state.confirmation && <FinalShow edit={this.state.final}/>}

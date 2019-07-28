@@ -14,6 +14,7 @@ class EditsShow extends React.Component {
 
     this.state = { edits: [] , num: 0 }
     this.addOne = this.addOne.bind(this)
+    this.minusOne = this.minusOne.bind(this)
 
 
   }
@@ -26,41 +27,38 @@ class EditsShow extends React.Component {
 
 
 
-
-  componentDidMount() {
-    const edits = []
-
-    axios.get(`/api/writings/${this.props.match.params.id}/edits`)
-
-      .then(res => this.setState({ edits: edits.concat(res.data) }))
-      .catch(err => console.log(err))
+  minusOne() {
+    let number = this.state.num
+    number -= 1
+    this.setState({ num: number })
   }
+
 
 
 
   render() {
 
-    if (!this.state.edits) return null
+    if (!this.props.edits) return null
     if(!this.props)
 
-      console.log(this.state.edits)
-    console.log(typeof this.state.edits)
+      console.log(this.props.edits)
+    console.log(typeof this.props.edits)
     // this.diff('human', 'humat')
 
 
     return (
       <main>
         <div className="edit-snippet-section">
-          {this.state.edits.map((edit, i) => (
+          {this.props.edits.map((edit, i) => (
             <div key={i}>
               { (this.state.num === i) &&
-              <EditRate edit={edit} writing={this.props.match.params.id}/> }
+              <EditRate edit={edit} writing={this.props.writing}/> }
 
             </div>
 
           ))}
-          <button onClick={this.addOne}>Next edit</button>
-
+          <button onClick={this.addOne} className="show-button">Next edit</button>
+          <button onClick={this.minusOne}  className="show-button">Last edit</button>
 
 
         </div>

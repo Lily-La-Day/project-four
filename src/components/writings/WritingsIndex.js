@@ -53,7 +53,7 @@ class WritingsIndex extends React.Component {
           <div className="writings-container scroll" >
             {this.state.writings.map((writing, i) => (
               <Link key={i} to={`/writings/${writing.id}`}>
-                <h3 key={writing.id}> {writing.title}</h3>
+                <h3 key={writing.id} > {writing.title}</h3>
               </Link>
 
 
@@ -75,8 +75,9 @@ class WritingsIndex extends React.Component {
             </div>
 
           ))}
-          <button onClick={this.addOne} className="show-writing-button">Next Writing</button>
           <button onClick={this.minusOne}  className="show-writing-button">Last Writing</button>
+          <button onClick={this.addOne} className="show-writing-button">Next Writing</button>
+
 
 
         </div> }

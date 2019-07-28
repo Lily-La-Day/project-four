@@ -75,20 +75,20 @@ class WriterProfile extends React.Component {
     console.log(writer, 'writer profile rendering')
     if (!this.state.writer) return null
     const { writer } = this.state
-    console.log(writer, 'writer profile rendering')
+    console.log(writer.created_writings, 'writer profile rendering')
     return (
 
 
       <section>
         <Nav />
-        <section className="profile grid-container"/>
+
+        <section/>
         {writer.created_writings.map((writing, i) => (
 
-          <div key={i} className ="writing">
-            <span key={writing.id}><h3 key={writing.id}> {writing.title}</h3></span>
+
 
             <OwnWritingShow writing={writing}/>
-          </div>
+    
 
 
 
