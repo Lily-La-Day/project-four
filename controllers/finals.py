@@ -23,7 +23,7 @@ def create():
     if errors:
         return jsonify(errors), 422
 
-    # final.editor = g.current_editor
+    final.writer = g.current_writer
     final.save()
     return final_schema.jsonify(final), 201
 
