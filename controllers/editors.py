@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, g
 from models.editor import Editor, EditorSchema
+from lib.secure_route import secure_route_editor
 
 
 api = Blueprint('editors', __name__)
@@ -28,6 +29,11 @@ def login():
         'message': f'Welcome back {editor.username}'
     }), 200
 
+@api.route('/editor', methods=['GET'])
+@secure_route_editor
+def editor():
+    print(g.current_editor)
+    return editor_schema.jsonify(g.current_editor), 200
 
 
 @api.route('/editors', methods=['GET'])

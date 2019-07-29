@@ -12,7 +12,7 @@ class EditRate extends React.Component {
   constructor() {
     super()
 
-    this.state = {  'rating': {}   }
+    this.state = {  'rating': {}, hasRated: false, editor: null   }
     this.starNumber =  0
     this.finalStarNumber= 0
     this.rated = false
@@ -21,6 +21,7 @@ class EditRate extends React.Component {
 
     this.starRating = this.starRating.bind(this)
     this.rate = this.rate.bind(this)
+    this.ratingCheck = this.ratingCheck.bind(this)
 
 
 
@@ -96,7 +97,25 @@ class EditRate extends React.Component {
   }
 
 
+  getData(){
 
+    axios.get('/api/editor', {
+      headers: { Authorization: ` ${Auth.getToken()}` }
+    })
+      .then(res => this.setState({ editor: res.data }), () => this.ratingCheck())
+      .catch(() => this.setState({ error: 'Invalid Crendentials' }))
+  }
+
+componentDidMount() {
+  this.getData()
+}
+
+ratingCheck() {
+  console.log('map',(this.props.edit.liked_by.map(like => like.id).includes(this.state.editor.id)))
+  if(this.props.edit.liked_by.map(like => like.id).includes(this.state.editor.id))
+
+  this.setState({ hasRated: true })
+}
 
 
 
@@ -104,15 +123,19 @@ class EditRate extends React.Component {
   render() {
 
     if (!this.props.edit) return null
+    if (!this.props.edit) return null
+    if (!this.state.editor) return null
+    console.log('editor', this.props.edit)
+console.log(this.state.hasRated)
 
-    console.log(this.props.edit)
+  console.log('map',(this.props.edit.liked_by.map(like => like.id).includes(this.state.editor.id)))
     return (
-      <main>
+      <main onMouseOver={this.ratingCheck}>
 
 
-        <h2 className="writingTitle">{this.props.edit.title}</h2>
+        <h2  className="writingTitle">{this.props.edit.title}</h2>
         <h5 className="edit-snippet"> {this.props.edit.text}</h5>
-        <div>
+      {!this.state.hasRated &&  <div>
           <div className="content">
             <h3>Rate This Edit</h3>
 
@@ -136,9 +159,9 @@ class EditRate extends React.Component {
             <h3 className="thank-you"> Thank you for rating! This edit currently has a rating of {this.props.edit.rating + this.state.rating}</h3>
           </div>
 
-        </div>
+        </div>}
 
-
+{this.state.hasRated && <h6> You've already rated this one! It currently has a rating of {this.props.edit.rating}</h6>}
       </main>
 
 

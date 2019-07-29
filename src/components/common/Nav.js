@@ -8,6 +8,7 @@ class Nav extends React.Component {
     super()
 
     this.state = { type: ''  }
+    this.pathCheck = this.pathCheck.bind(this)
 
 
 
@@ -33,10 +34,10 @@ class Nav extends React.Component {
   render() {
     console.log(this.state)
     return(
-      <nav className="navbar">
+      <nav onMouseOver={this.pathCheck} className="navbar">
 
 
-        
+
         {!Auth.isAuthenticated() && <Link to="/register" className="nav-item nav-one">Register</Link>}
         {!Auth.isAuthenticated() && <Link to="/writerlogin" className="nav-item nav-two" onClick={()=>this.pathCheck()} type={this.state.type}>Log In to Write</Link>}
         {!Auth.isAuthenticated() && <Link to="/edit-orlogin" className="nav-item nav-three" onClick={()=>this.pathCheck()} >Log In to Edit</Link>}

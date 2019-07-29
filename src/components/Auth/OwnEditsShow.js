@@ -14,7 +14,7 @@ class OwnEditsShow extends React.Component {
   constructor() {
     super()
 
-    this.state = {  num: 0, 'edit': null  , confirmation: false, data: {}, finals: null }
+    this.state = {  num: 0, 'edit': null  , confirmation: false, data: {}, finals: null, edited: null }
     this.addOne = this.addOne.bind(this)
     this.minusOne = this.minusOne.bind(this)
     this.selectFinal = this.selectFinal.bind(this)
@@ -23,28 +23,15 @@ class OwnEditsShow extends React.Component {
 
   }
 
-  // componentDidMount() {
-  //   this.getFinals()
-  // }
-  //
-  // getFinals() {
-  //   axios.get('/api/finals')
-  //     .then(res => this.setState({ finals: res.data }))
-  //     .catch(err => console.log(err))
-  // }
-  //
-  // filterFinals() {
-  //
-  //
-  //   console.log(this.props.edits.forEach(edit => this.state.finals.filter(final =>
-  //     console.log(final.edit.id, edit.id)
-  //     (final.edit.id !== edit.id)
-  //
-  //   )))
-  //
-  // }
+  componentDidMount() {
+    this.getFinals()
+  }
 
-
+  getFinals() {
+    axios.get('/api/finals')
+      .then(res => this.setState({ finals: res.data }))
+      .catch(err => console.log(err))
+  }
 
   addOne() {
     let number = this.state.num
@@ -57,15 +44,8 @@ class OwnEditsShow extends React.Component {
     number -= 1
     this.setState({ num: number })
   }
-  //
-  // selectFinal(edit) {
-  //
-  //   this.setState({ edit_id: edit.id })
-  //   this.setState({ final: edit })
-  //   console.log(edit.id)
-  //   console.log(edit)
-  //
-  // }
+
+
 
   selectFinal(edito) {
 
@@ -75,6 +55,7 @@ class OwnEditsShow extends React.Component {
 
     this.setState({ final : data })
     this.setState({ 'edit': data })
+    this.setState({ edited: edito })
   }
 
 
@@ -96,14 +77,21 @@ class OwnEditsShow extends React.Component {
     })
       .catch((err) => console.log(err))
 
+    axios.post(`/api/writings/${this.state.edited.original.id}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}`}
+
+
+      })
+        .catch((err) => console.log(err))
+
   }
 
 
   render() {
-console.log(this.props, this.state)
+
     if (!this.props.edits) return null
     if(!this.props)
-    console.log('final', this.state.final)
+    console.log('final', this.state.final.map(final => final.edit.original.author.id))
     return (
       <main>
         {!this.state.confirmation && <div className="edit-snippet-section">
@@ -116,11 +104,12 @@ console.log(this.props, this.state)
                   {edito.rating &&
                     <h2>{edito.rating} </h2>}
                     {!this.state.final && <button className="make-final" onClick={() => this.selectFinal(edito)}>Make Final</button>}
+                    {this.state.final && <button className="make-final" onClick={() => this.confirmFinal(edito)}>Are you sure!? Once you confirm
+                  it is confirmed!</button>}
                   </section> }
 
 
-              {this.state.final && <button className="make-final" onClick={() => this.confirmFinal(edito)}>Are you sure!? Once you confirm
-            it is confirmed!</button>}
+
 
             </div>
 

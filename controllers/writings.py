@@ -33,3 +33,20 @@ def show(writing_id):
     if not writing:
         return jsonify({'message': 'not found'}), 404
     return writing_schema.jsonify(writing), 200
+
+
+@api.route('/writings/<int:writing_id>', methods=['POST'])
+def deactivate(writing_id):
+    writing = Writing.query.get(writing_id)
+
+
+    # data = request.get_json()
+    # print(data['rating'])
+    # edit = Edit.query.get(edit_id)
+    # print(edit)
+    # if not edit:
+    #     return jsonify({'message': 'Not Found'}), 404
+    writing.active=False
+    # edit.rating = data['rating']
+    writing.save()
+    return writing_schema.jsonify(writing), 201

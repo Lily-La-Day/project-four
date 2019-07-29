@@ -23,13 +23,11 @@ class OwnWritingShow extends React.Component {
   }
 
   filterFinals() {
-    let filtered = this.state.edits.map(edit => this.state.finals.filter(final =>
 
-      (final.edit.id !== edit.id)
-
-    ))[0]
-    console.log(filtered)
+    let filtered = this.state.edits.map(edit => edit.id)
+    let finals = this.state.finals.map(final => final.edit.id)
     this.setState({ filteredEdits: filtered })
+
 
   }
 
@@ -56,9 +54,9 @@ class OwnWritingShow extends React.Component {
     // if (!this.state.edits) return null
     if (!this.props.writing) return null
     if (!this.state.finals) return null
-    if (!this.state.filteredEdits) return null
+    // if (!this.state.filteredEdits) return null
     if (!this.state.edits) return null
-console.log('me!', this.state.finals)
+
 
     // this.diff('human', 'humat')
     return (
@@ -72,7 +70,7 @@ console.log('me!', this.state.finals)
           <p key={this.props.writing.id} > {this.props.writing.text}</p>
 
           {this.state.filteredEdits &&
-          <OwnEditsShow edits={this.state.edits} writing={this.props.writing}/>}
+          <OwnEditsShow edits={this.state.edits} writing={this.props.writing} finals={this.state.finals}/>}
 
 
         </div>

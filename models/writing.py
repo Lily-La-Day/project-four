@@ -25,6 +25,7 @@ class Writing(db.Model, WritingBaseModel):
     author = db.relationship('Writer', backref='created_writings')
     author_id = db.Column(db.Integer, db.ForeignKey('writers.id'))
     categories = db.relationship('Category', secondary=writing_categories, backref='writings')
+    active = db.Column(db.Boolean, default=True)
 
 
 
