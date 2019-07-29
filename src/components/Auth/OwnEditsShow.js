@@ -14,7 +14,7 @@ class OwnEditsShow extends React.Component {
   constructor() {
     super()
 
-    this.state = {  num: 0, final: null, confirmation: false, data: {} }
+    this.state = {  num: 0, final: null, confirmation: false, data: {}, finals: null }
     this.addOne = this.addOne.bind(this)
     this.minusOne = this.minusOne.bind(this)
     this.selectFinal = this.selectFinal.bind(this)
@@ -22,6 +22,28 @@ class OwnEditsShow extends React.Component {
 
 
   }
+
+  componentDidMount() {
+    this.getFinals()
+  }
+
+  getFinals() {
+    axios.get('/api/finals')
+      .then(res => this.setState({ finals: res.data }))
+      .catch(err => console.log(err))
+  }
+
+  filterFinals() {
+    console.log('finals:', this.state.finals)
+
+    console.log(this.props.edits.forEach(edit => this.state.finals.filter(final =>
+      console.log(final.edit.id, edit.id)
+      (final.edit.id !== edit.id)
+
+    )))
+
+  }
+
 
 
   addOne() {
@@ -52,7 +74,8 @@ const edit_id = { edit:edito.id }
 const data = {...this.state.data, edito, edit: edit_id  }
 
     this.setState({ final: data })
-    console.log(data)
+
+    this.filterFinals()
 
 
   }

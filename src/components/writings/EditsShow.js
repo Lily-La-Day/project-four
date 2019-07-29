@@ -36,6 +36,8 @@ class EditsShow extends React.Component {
 
 
 
+
+
   render() {
 
     if (!this.props.edits) return null
