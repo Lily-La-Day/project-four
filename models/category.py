@@ -9,7 +9,7 @@ class Category(db.Model, BaseModel):
     name = db.Column(db.String(40), unique=True, nullable=False)
 
 class CategorySchema(ma.ModelSchema, BaseSchema):
-    writings = fields.Nested('WritingSchema', many=True, only=('title', 'id'))
+    writings = fields.Nested('WritingSchema', many=True )
 
     class Meta:
         model = Category

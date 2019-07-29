@@ -60,10 +60,11 @@ class EditsShow extends React.Component {
 
           ))}
           <button onClick={this.addOne} className="show-button">Next edit</button>
+            <br></br>
           <button onClick={this.minusOne}  className="show-button">Last edit</button>
+</div>
 
 
-        </div>
 
 
 

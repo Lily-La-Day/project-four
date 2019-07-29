@@ -1,24 +1,30 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
+import Nav from '../common/Nav'
 
 class Login extends React.Component {
   constructor() {
     super()
 
-    this.state = { data: {}, error: '', type: '' }
+    this.state = { data: {}, error: '', editor: '' }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmitWriter = this.handleSubmitWriter.bind(this)
     this.handleSubmitEditor = this.handleSubmitEditor.bind(this)
+    this.pathCheck = this.pathCheck.bind(this)
 
   }
 
-
-  componentDidMount() {
+  pathCheck() {
     if(this.props.location.pathname === '/editorlogin')
       this.setState({ type: 'editor' })
     else if(this.props.location.pathname === '/writerlogin')
       this.setState({ type: 'writer' })
+  }
+
+
+  componentDidMount() {
+    this.pathCheck()
   }
 
   handleChange({ target: { name, value }}) {
@@ -32,7 +38,7 @@ class Login extends React.Component {
     axios.post('/api/editorlogin', this.state.data)
       .then(res => {
         Auth.setToken(res.data.token)
-        this.props.history.push('/writings')
+        this.props.history.push('/edit-writings')
       })
       .catch(() => this.setState({ error: 'Invalid Crendentials'}))
   }
@@ -51,10 +57,11 @@ class Login extends React.Component {
 
 
   render(){
-    console.log(this.state.type)
+console.log(this.state.type)
     return (
-      <main>
 
+      <main>
+  <Nav type={this.state.type} pathCheck={this.pathCheck}/>
         {(this.state.type === 'writer') &&
         <form className="form-style login" onSubmit={this.handleSubmitWriter}>
 

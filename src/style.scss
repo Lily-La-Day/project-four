@@ -130,7 +130,7 @@ margin-top: 100px;
 
 
 .show-edit-container {
-  height: 25vh;
+
   display: grid;
   justify-content: center;
   align-content: center;
@@ -373,7 +373,7 @@ margin-right: 25%;
   height: 2em;
   background-color: black;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1;
   align-items: center;
   justify-items: center;
@@ -408,7 +408,9 @@ margin-right: 25%;
   display: grid;
 justify-self: center;
 grid-column: 1;
-  grid-row: 4;
+margin-bottom: 0.75em;
+margin-top: 0.75em;
+
 
 }
 

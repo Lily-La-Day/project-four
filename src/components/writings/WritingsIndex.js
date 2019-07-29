@@ -38,9 +38,9 @@ class WritingsIndex extends React.Component {
 
 
   render() {
-    console.log(this.props.filteredWritings)
+console.log(this.props.filteredWritings)
     if (!this.state.writings) return null
-    console.log(this.state.writings)
+
 
     return (
 
@@ -52,7 +52,7 @@ class WritingsIndex extends React.Component {
 
           <div className="writings-container scroll" >
             {this.state.writings.map((writing, i) => (
-              <Link key={i} to={`/writings/${writing.id}`}>
+              <Link key={i} to={`/edit-writings/${writing.id}`}>
                 <h3 key={writing.id} > {writing.title}</h3>
               </Link>
 
@@ -65,7 +65,7 @@ class WritingsIndex extends React.Component {
 
             <div key={i} >
               {(this.state.num === i) &&
-              <Link to={`/writings/${writing.id}`}>
+              <Link to={`/edit-writings/${writing.id}`}>
 
                 <h3 className="writing-title" key={i}>
                   {writing.title}</h3>
@@ -85,7 +85,7 @@ class WritingsIndex extends React.Component {
         {this.props.filteredWritings && <div>
           <div className="writings-container scroll">
             {this.props.filteredWritings.map((writing, i) => (
-              <Link to={`/writings/${writing.id}`}>
+              <Link to={`/edit-writings/${writing.id}`}>
                 <h3 key={writing.id}> {writing.title}</h3>
               </Link>
 
@@ -96,20 +96,20 @@ class WritingsIndex extends React.Component {
 
             <div key={i} className ="shown-writing">
               {(this.state.num === i) &&
-              <Link to={`/writings/${writing.id}`}>
-                <div key={i}>
-                  <h3 key={i} className="writing-title">
-                    {writing.title}</h3></div>
-                <p className="index-writing-show" > {writing.text}</p>
+              <Link to={`/edit-writings/${writing.id}`}>
+
+              <h3 className="writing-title" key={i}>
+                {writing.title}</h3>
+              <p className="index-writing-show" > {writing.text}</p>
               </Link>}
 
             </div>
 
 
           ))}
-          <button onClick={this.addOne} className="show-writing-button">Next Writing</button>
-          <button onClick={this.minusOne}  className="show-writing-button">Last Writing</button>
 
+          <button onClick={this.minusOne}  className="show-writing-button">Last Writing</button>
+          <button onClick={this.addOne} className="show-writing-button">Next Writing</button>
         </div> }
 
 
@@ -120,21 +120,3 @@ class WritingsIndex extends React.Component {
 }
 
 export default WritingsIndex
-
-
-
-
-// { !this.props.category && <div className="grid-container">
-//
-//   {this.state.writings.map((writing, i) => (
-//
-//     <div key={i} className ="writing">
-//
-//       <Link to={`/writings/${writing.id}`}>
-//         <span key={writing.id}><h3 key={writing.id}> {writing.title}</h3></span>
-//       </Link>
-//     </div>
-//
-//   ))}
-//
-// </div> }

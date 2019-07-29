@@ -11,9 +11,9 @@ class EditCreate extends React.Component {
   constructor() {
     super()
 
-    this.state = { writing: null, data: { }, autoWordData: [], text: [], word: '', wordData: [], textTwo: '', query: '', highlighted: '' }
+    this.state = { writing: null, data: { }, autoWordData: [], text: [], word: '', wordData: [], textTwo: '', query: '', highlighted: '', synonyms: null, autosynonyms: null, definition: false }
     this.handleChange = this.handleChange.bind(this)
-    // this.handleChangeText = this.handleChangeText.bind(this)
+    this.changeMode = this.changeMode.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.makeArray = this.makeArray.bind(this)
     this.setWord = this.setWord.bind(this)
@@ -42,9 +42,6 @@ class EditCreate extends React.Component {
 
 
   handleChange({ target: { name, value }}) {
-
-
-
     let text = []
 
     const data = {...this.state.data, [name]: value, original: { id: this.state.writing.id } }
@@ -58,15 +55,14 @@ class EditCreate extends React.Component {
     this.setState({
       query: text[text.length - 2]
     })
-
-    console.log('state query', this.state.query)
-
-
-
-
-
-
   }
+
+changeMode() {
+  if(!this.state.definition)
+  this.setState({ definition })
+
+}
+
 
   matchWord(e) {
     if(this.state.textTwo.length > 3) {
@@ -120,7 +116,7 @@ class EditCreate extends React.Component {
     })
       .then((res) => {
         this.setState({wordData: res.data.results})
-        console.log(res.data.results[0].synonyms)
+        this.setState({ synonyms: res.data.results[0].synonyms })
       })
 
   }
@@ -134,7 +130,7 @@ class EditCreate extends React.Component {
       })
         .then((res) => {
           this.setState({autoWordData: res.data.results})
-          console.log(res.data.results[0].synonyms)
+          this.setState({ autosynonyms: res.data.results[0].synonyms })
         })
       // document.querySelectorAll('p').forEach(el => el.classList.remove('highlighted'))
     }
@@ -188,7 +184,7 @@ class EditCreate extends React.Component {
 
   render() {
     if (!this.state.writing) return null
-    console.log(this.state.wordData)
+    console.log(this.state.synonyms)
 
     const { writing } =  this.state
 
@@ -200,15 +196,23 @@ class EditCreate extends React.Component {
             <div>
               <h2 className="original-title">{writing.title}</h2>
 
+              {!this.state.definition && <button className="mode" onClick={this.changeMode}>Dictionary Mode</button>}
+              {this.state.definition && <button className="mode" onClick={this.changeMode}>Thesaurus Mode</button>}
+
               <div className="writings-container scroll" >
                 {!this.state.textTwo &&  this.state.text.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className="words highlighted">{word}</p>)}
                 {this.state.textTwo && this.state.textTwo.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className={word} >{word}</p>)}
               </div>
-              <div className="container" >
+            {this.state.defition &&  <div className="container" >
                 {this.state.word && this.state.wordData && this.state.wordData.map((word, i) => <p key={i}>{word.definition}</p>)}
                 {this.state.autoWordData && this.state.autoWordData.map((word, i) => <p key={i}>{word.definition}</p>)}
 
-              </div>
+              </div>}
+              {!this.state.definition && <div className="container" >
+                {this.state.word && this.state.synonyms && this.state.synonyms.map((word, i) => <p key={i}>{word}</p>)}
+                {this.state.autosynonyms && this.state.autosynonyms.map((word, i) => <p key={i}>{word}</p>)}
+
+              </div>}
 
             </div>
 

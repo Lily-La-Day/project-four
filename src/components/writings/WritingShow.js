@@ -81,7 +81,7 @@ class WritingShow extends React.Component {
 
           <p  className="writing-show" key={this.state.writing.id} > {this.state.writing.text}</p>
 
-          <Link to={`/writings/${this.state.writing.id}/edit`}> <button className="edit-button"> Edit </button></Link>
+          <Link to={`/edit-writings/${this.state.writing.id}/edit`}> <button className="edit-button"> Edit </button></Link>
 
   </div>}
   <div className="show-edit-container">
