@@ -15,11 +15,9 @@ def index():
 @api.route('/finals', methods=['POST'])
 @secure_route
 def create():
-
     data = request.get_json()
     print(data)
     final, errors = final_schema.load(data)
-
     if errors:
         return jsonify(errors), 422
 

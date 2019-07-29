@@ -26,6 +26,7 @@ const App = () => {
           <Switch>
             {/* <Route path='/writings/:id/edits/edit:id' component={EditsShow} /> */}
             {/* <Route path='/writings/:id/edits' component={EditsShow} /> */}
+            <Route path='/edit-orlogin' component={Login} />
             <Route path='/edit-writings/:id/edit' component={EditCreate} />
             <Route path='/edit-writings/:id/' component={WritingShow} />
             <Route path='/writingsubmit' component={WritingCreate} />
@@ -34,7 +35,7 @@ const App = () => {
             <Route path='/writerprofile/:id/writings' component={OwnWritingShow} />
 
             <Route path='/writerlogin' component={Login} />
-            <Route path='/editorlogin' component={Login} />
+
             <Route path='/edit-writings' component={SearchIndex} />
 
 

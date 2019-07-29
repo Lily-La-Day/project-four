@@ -16,16 +16,18 @@ class Login extends React.Component {
   }
 
   pathCheck() {
-    if(this.props.location.pathname === '/editorlogin')
+    if(this.props.location.pathname.includes('edit'))
       this.setState({ type: 'editor' })
-    else if(this.props.location.pathname === '/writerlogin')
+    else
       this.setState({ type: 'writer' })
   }
 
-
-  componentDidMount() {
+  componentDidMount(){
     this.pathCheck()
   }
+
+
+
 
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value }
@@ -57,13 +59,14 @@ class Login extends React.Component {
 
 
   render(){
-console.log(this.state.type)
+console.log(this.props)
+
     return (
 
       <main>
-  <Nav type={this.state.type} pathCheck={this.pathCheck}/>
+  <Nav />
         {(this.state.type === 'writer') &&
-        <form className="form-style login" onSubmit={this.handleSubmitWriter}>
+        <form onMouseOver={this.pathCheck} className="form-style login" onSubmit={this.handleSubmitWriter}>
 
           <label className='label'>Email</label>
           <div className="control">
@@ -84,8 +87,9 @@ console.log(this.state.type)
           </div>
 
           <button type="submit" className="button" > Login as Writer</button>
+
         </form>}
-        {(this.state.type === 'editor') && <form className="form-style login"  onSubmit={this.handleSubmitEditor} >
+        {(this.state.type === 'editor') && <form onMouseOver={this.pathCheck} className="form-style login"  onSubmit={this.handleSubmitEditor} >
 
           <label className='label'>Email</label>
           <div className="control">
@@ -107,6 +111,7 @@ console.log(this.state.type)
           <button type="submit" className="button"> Login as Editor</button>
 
         </form>}
+
       </main>
     )
   }

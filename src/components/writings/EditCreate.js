@@ -59,7 +59,7 @@ class EditCreate extends React.Component {
 
 changeMode() {
   if(!this.state.definition)
-  this.setState({ definition })
+  this.setState({ definition: true })
 
 }
 
@@ -184,7 +184,7 @@ changeMode() {
 
   render() {
     if (!this.state.writing) return null
-    console.log(this.state.synonyms)
+    console.log(this.state.definition)
 
     const { writing } =  this.state
 
@@ -203,7 +203,7 @@ changeMode() {
                 {!this.state.textTwo &&  this.state.text.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className="words highlighted">{word}</p>)}
                 {this.state.textTwo && this.state.textTwo.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className={word} >{word}</p>)}
               </div>
-            {this.state.defition &&  <div className="container" >
+            {this.state.definition &&  <div className="container" >
                 {this.state.word && this.state.wordData && this.state.wordData.map((word, i) => <p key={i}>{word.definition}</p>)}
                 {this.state.autoWordData && this.state.autoWordData.map((word, i) => <p key={i}>{word.definition}</p>)}
 

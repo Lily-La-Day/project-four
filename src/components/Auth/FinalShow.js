@@ -33,8 +33,7 @@ class FinalShow extends React.Component {
 
 
   render() {
-    console.log(this.props)
-    console.log(this.state.final)
+  
     if (!this.state.final) return null
 
     return (
