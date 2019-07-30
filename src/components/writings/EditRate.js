@@ -102,7 +102,8 @@ class EditRate extends React.Component {
     axios.get('/api/editor', {
       headers: { Authorization: ` ${Auth.getToken()}` }
     })
-      .then(res => this.setState({ editor: res.data }), () => this.ratingCheck())
+      .then(res => this.setState({ editor: res.data }))
+      .then(()=> this.ratingCheck())
       .catch(() => this.setState({ error: 'Invalid Crendentials' }))
   }
 
@@ -130,7 +131,7 @@ console.log(this.state.hasRated)
 
   console.log('map',(this.props.edit.liked_by.map(like => like.id).includes(this.state.editor.id)))
     return (
-      <main onMouseOver={this.ratingCheck}>
+      <main>
 
 
         <h2  className="writingTitle">{this.props.edit.title}</h2>

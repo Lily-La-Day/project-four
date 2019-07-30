@@ -11,7 +11,7 @@ class EditCreate extends React.Component {
   constructor() {
     super()
 
-    this.state = { writing: null, data: { }, autoWordData: [], text: [], word: '', wordData: [], textTwo: '', query: '', highlighted: '', synonyms: null, autosynonyms: null, definition: false }
+    this.state = { writing: null, data: { }, autoWordData: [], text: [], word: '', wordData: [], textTwo: '', query: '', highlighted: '', synonyms: null, autosynonyms: null, definition: false, }
     this.handleChange = this.handleChange.bind(this)
     this.changeMode = this.changeMode.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -28,14 +28,9 @@ class EditCreate extends React.Component {
 
   handleInputChange(e) {
     e.preventDefault()
-
     this.setState({
       query: this.search.value
     })
-
-
-
-
   }
 
 
@@ -67,18 +62,18 @@ changeMode() {
   matchWord(e) {
     if(this.state.textTwo.length > 3) {
       if(e.keyCode == 32){
-        console.log('query', this.state.query)
+
         const comparison = this.state.query.split(' ')
         const comparisonTwo = [this.state.query]
-        console.log('comparison', comparison[0], comparisonTwo)
-        console.log(this.state.textTwo.forEach((word) => {
+
+        this.state.textTwo.forEach((word) => {
           if(word.length > 1 && word == this.state.query) {
 
             console.log('match:', word)
             document.querySelector(`.${word}`).classList.add('highlighted')
           }
 
-        }))
+        })
         this.setState({
           query: ''
         })
@@ -86,12 +81,6 @@ changeMode() {
     }
 
   }
-  //
-  // word.length > 1 && word == comparison[0] ||
-
-
-
-
 
 
   makeArray() {
@@ -116,7 +105,11 @@ changeMode() {
     })
       .then((res) => {
         this.setState({wordData: res.data.results})
-        this.setState({ synonyms: res.data.results[0].synonyms })
+        let synonyms = []
+      synonyms =  res.data.results.map(result => result.synonyms)
+      synonyms = synonyms.filter(array => array)
+      this.setState({ synonyms: synonyms })
+
       })
 
   }
@@ -129,14 +122,20 @@ changeMode() {
         headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800'}
       })
         .then((res) => {
+
           this.setState({autoWordData: res.data.results})
-          this.setState({ autosynonyms: res.data.results[0].synonyms })
-        })
-      // document.querySelectorAll('p').forEach(el => el.classList.remove('highlighted'))
+            let synonyms = []
+          synonyms =  res.data.results.map(result => result.synonyms)
+          synonyms = synonyms.filter(array => array)
+          this.setState({ autosynonyms: synonyms })
+
+           })
+        }
+
     }
 
 
-  }
+
 
 
 
@@ -162,7 +161,7 @@ changeMode() {
   }
 
   stateCheck() {
-    console.log(this.state.textTwo)
+    console.log('autoGetWord', this.state.autoWordData)
   }
 
 
@@ -175,16 +174,11 @@ changeMode() {
 
 
   }
-  // diff(oldStr, newStr){
-  //     console.log(Diff.diffChars(oldStr, newStr))
-  //   }
-  //   log(e) {
-  //     console.log(e.target.value.innerText)
-  //   },
+
 
   render() {
     if (!this.state.writing) return null
-    console.log(this.state.definition)
+    console.log(this.state.autosynonyms)
 
     const { writing } =  this.state
 
@@ -194,7 +188,7 @@ changeMode() {
         <div className="edit-container" onMouseOver={this.makeArray}>
           <div onClick={this.stateCheck} className ="original">
             <div>
-              <h2 className="original-title">{writing.title}</h2>
+              <h3 className="original-title">{writing.title}</h3>
 
               {!this.state.definition && <button className="mode" onClick={this.changeMode}>Dictionary Mode</button>}
               {this.state.definition && <button className="mode" onClick={this.changeMode}>Thesaurus Mode</button>}
@@ -203,14 +197,30 @@ changeMode() {
                 {!this.state.textTwo &&  this.state.text.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className="words highlighted">{word}</p>)}
                 {this.state.textTwo && this.state.textTwo.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className={word} >{word}</p>)}
               </div>
-            {this.state.definition &&  <div className="container" >
-                {this.state.word && this.state.wordData && this.state.wordData.map((word, i) => <p key={i}>{word.definition}</p>)}
-                {this.state.autoWordData && this.state.autoWordData.map((word, i) => <p key={i}>{word.definition}</p>)}
+            {this.state.definition &&  <div className="alts container" >
+                {this.state.word && this.state.wordData && this.state.wordData.map((word, i) =>
+                    (i < 20) &&
+                   <p className="alt-word" key={i}>{word.definition}</p>)}
+
+
+                {this.state.autoWordData && this.state.autoWordData.map((word, i) =>
+                  (i < 20) &&
+                   <p className="alt-word" key={i}>{word.definition}</p>)}
 
               </div>}
-              {!this.state.definition && <div className="container" >
-                {this.state.word && this.state.synonyms && this.state.synonyms.map((word, i) => <p key={i}>{word}</p>)}
-                {this.state.autosynonyms && this.state.autosynonyms.map((word, i) => <p key={i}>{word}</p>)}
+              {!this.state.definition &&  <div className="alts container" >
+                {this.state.synonyms && this.state.synonyms.map((word, i) =>
+                    (i < 20) &&
+                  word.map(el => <p className="alt-word" key={i}>{el}</p>)
+
+                )}
+
+
+          {!this.state.synonyms && this.state.autosynonyms && this.state.autosynonyms.map((word, i) =>
+              (i < 20) &&
+            word.map(el => <p className="alt-word" key={i}>{el}</p>)
+
+          )}
 
               </div>}
 
@@ -223,7 +233,7 @@ changeMode() {
 
             <h3 className="edit-form-title">Submit an Edit</h3>
 
-            <label className='label'>Title</label>
+            <label className='form-title label'>Title</label>
             <div className="control">
               <input
                 onChange = {this.handleChange}
@@ -232,7 +242,7 @@ changeMode() {
 
                 defaultValue={this.state.writing.title}/>
             </div>
-            <label className='label'>The Original</label>
+            <label className='form-small label'>The Original</label>
             <div className="control">
               <textarea readOnly
                 type="text"
@@ -241,7 +251,7 @@ changeMode() {
                 value= {this.state.writing.text}
               />
             </div>
-            <label className='label'>Your Edit</label>
+            <label className='form-small label'>Your Edit</label>
             <div className="control">
               <textarea
                 onChange = {this.handleChange}

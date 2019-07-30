@@ -91,7 +91,7 @@ class OwnEditsShow extends React.Component {
 
     if (!this.props.edits) return null
     if(!this.props)
-    console.log('final', this.state.final.map(final => final.edit.original.author.id))
+    
     return (
       <main>
         {!this.state.confirmation && <div className="edit-snippet-section">

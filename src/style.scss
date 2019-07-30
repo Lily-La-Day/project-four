@@ -7,6 +7,7 @@
   text-decoration: none;
   box-sizing: border-box;
 
+
   background-repeat: no-repeat;
 
 }
@@ -37,6 +38,10 @@ main {
 
 }
 
+h6 {
+  text-align: left;
+}
+
 
 
 
@@ -58,7 +63,7 @@ main {
 
 
 .writing {
-
+white-space: pre-line !important;
   background-color: white;
   letter-spacing: 1pt;
   padding-left: 2em;
@@ -94,7 +99,7 @@ h1 {
 align-content: center;
 align-content: center;
   grid-template-columns: repeat(1, 1fr);
-
+white-space: pre-line !important;
   justify-content: center;
   justify-items: center;
 
@@ -122,7 +127,7 @@ margin-top: 100px;
   justify-content: center;
   align-items: center;
 
-
+white-space: pre-line !important;
   align-items: center;
 
 
@@ -130,7 +135,7 @@ margin-top: 100px;
 
 
 .show-edit-container {
-
+white-space: pre-line !important;
   display: grid;
   justify-content: center;
   align-content: center;
@@ -145,12 +150,25 @@ margin-top: 100px;
 }
 .create-edit {
   grid-column: 2;
-  margin-top: -10em !important;
+  margin-top: -2em;
+
 }
 
 .edit-form-title {
   margin-top: 0;
+    padding: 0;
 }
+
+.form-title {
+  padding: 0;
+}
+
+.form-small {
+  padding: -1em;
+
+}
+
+
 
 
 
@@ -161,7 +179,7 @@ margin-top: 100px;
 
 }
 .edit-snippet {
-
+white-space: pre-line !important;
 }
 
 .choice {
@@ -170,16 +188,14 @@ margin-top: 100px;
 }
 
 .writer {
-
-  color: black;
-
+color: black;
 grid-column: 2;
 grid-row: 2;
-  font-size: 1.5em;
-  justify-self: start;
-  background-color: transparent;
-  border: 0px;
-  box-shadow: none;
+font-size: 1.5em;
+justify-self: start;
+background-color: transparent;
+border: 0px;
+box-shadow: none;
 }
 
 .own-edits {
@@ -222,14 +238,17 @@ h3 {
   margin-left: 25%;
   margin-right: 25%;
   font-weight: bolder;
+  white-space: pre-line !important;
+}
+
+.original-title {
+  margin-top: -15%;
 }
 
 
 
 
-
-
-.writingTitle, h2 {
+ h2 {
 margin-top: 15%;
   padding: 0;
 margin-left: 25%;
@@ -268,17 +287,16 @@ margin-right: 25%;
 
 }
 
-.form{
+.form, .form-style {
   white-space: pre-wrap;
-
-
-
 }
 
 .thank-you {
   display: none;
   margin: 0 auto;
 }
+
+
 
 
 
@@ -450,7 +468,6 @@ p, text, h5 {
 .content h1 {
   font-family: 'Sansita', sans-serif;
   letter-spacing: 1px;
-  font-size: 50px;
   color: #282828;
   margin-bottom: 10px;
 }
@@ -603,13 +620,6 @@ color: black;
   }
 
 
-
-
-  // body{
-  //   background: #f2f2f2;
-  //   font-family: 'Open Sans', sans-serif;
-  // }
-
   .search input {
     height: 3em;
     width: 20em;
@@ -669,12 +679,18 @@ height: 500px;
   display: none;
 }
 
-  //
-  // /*Resize the wrap to see the search bar change!*/
-  // .wrap{
-  //   width: 30%;
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  // }
+.alt-word {
+  padding: 0.5em;
+  word-wrap: normal;
+  word-spacing: 5px;
+}
+
+.alts {
+  font-size: 0.7em;
+}
+
+
+.form-small label {
+  padding: 0;
+  font-size: 1.2em;
+}

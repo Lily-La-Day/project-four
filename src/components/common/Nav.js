@@ -18,7 +18,7 @@ class Nav extends React.Component {
 
   pathCheck() {
 
-    if(this.props.location.pathname.includes('edit') || this.props.location.pathname.includes('edit-') )
+    if(this.props.location.pathname.includes('edit') || this.props.location.pathname.includes('edit-') || this.props.location.pathname.includes('edit-writings'))
       this.setState({ type: 'editor' })
     else this.setState({ type: 'writer' })
   }
