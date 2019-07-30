@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import EditRate from './EditRate'
 
 
@@ -59,9 +59,11 @@ class EditsShow extends React.Component {
             </div>
 
           ))}
-          <button onClick={this.addOne} className="show-button">Next edit</button>
-            <br></br>
-          <button onClick={this.minusOne}  className="show-button">Last edit</button>
+
+          {this.state.num < this.props.edits.length && <button onClick={this.addOne} className="show-button">Next edit</button>}
+
+          {this.state.num > 0 && <button onClick={this.minusOne}  className="show-button">Last edit</button>}
+
 </div>
 
 

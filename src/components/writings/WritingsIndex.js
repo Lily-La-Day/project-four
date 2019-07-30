@@ -69,14 +69,19 @@ console.log(this.props.filteredWritings)
 
                 <h3 className="writing-title" key={i}>
                   {writing.title}</h3>
-                <p className="index-writing-show" > {writing.text}</p>
+                <p className="index-writing-show" >
+                  {writing.text}
+
+
+                </p>
+
               </Link>}
 
             </div>
 
           ))}
-          <button onClick={this.minusOne}  className="show-writing-button">Last Writing</button>
-          <button onClick={this.addOne} className="show-writing-button">Next Writing</button>
+      {this.state.num > 0 &&  <button onClick={this.minusOne}  className="show-writing-button">Last Writing</button>}
+    {this.state.num < this.state.writings.length &&      <button onClick={this.addOne} className="show-writing-button">Next Writing</button>}
 
 
 
@@ -101,6 +106,7 @@ console.log(this.props.filteredWritings)
               <h3 className="writing-title" key={i}>
                 {writing.title}</h3>
               <p className="index-writing-show" > {writing.text}</p>
+              <button className="show-writing-button">See More</button>
               </Link>}
 
             </div>
@@ -108,8 +114,8 @@ console.log(this.props.filteredWritings)
 
           ))}
 
-          <button onClick={this.minusOne}  className="show-writing-button">Last Writing</button>
-          <button onClick={this.addOne} className="show-writing-button">Next Writing</button>
+  {this.state.num > 0 &&   <button onClick={this.minusOne}  className="show-writing-button">Last Writing</button>}
+  {this.state.num < this.props.filteredWritings.length && <button onClick={this.addOne} className="show-writing-button">Next Writing</button>}
         </div> }
 
 

@@ -149,7 +149,7 @@ changeMode() {
 
       .then(() => {
 
-        this.props.history.push('/writings')
+        this.props.history.push('/edit-writings')
       })
       .catch((err) => console.log(err))
   }
@@ -275,7 +275,7 @@ changeMode() {
           </form>
           <form className="search">
             <input
-              placeholder="Search writing categories..."
+              placeholder="Search words..."
               ref={input => this.search = input}
               onChange={this.handleInputChange}
               onKeyUp={this.matchWord}

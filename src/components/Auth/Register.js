@@ -29,7 +29,7 @@ class Register extends React.Component {
   handleSubmitEditor(e) {
     e.preventDefault()
     axios.post('/api/editorregister', this.state.data )
-      .then(() => this.props.history.push('/editorlogin'))
+      .then(() => this.props.history.push('/edit-orlogin'))
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 

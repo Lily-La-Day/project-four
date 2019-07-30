@@ -26,9 +26,6 @@ class Login extends React.Component {
     this.pathCheck()
   }
 
-
-
-
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value }
     this.setState({ data, error: '' })
@@ -59,12 +56,12 @@ class Login extends React.Component {
 
 
   render(){
-console.log(this.props)
+    console.log(this.props)
 
     return (
 
       <main>
-  <Nav />
+        <Nav />
         {(this.state.type === 'writer') &&
         <form onMouseOver={this.pathCheck} className="form-style login" onSubmit={this.handleSubmitWriter}>
 

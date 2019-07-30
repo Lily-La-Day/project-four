@@ -654,13 +654,21 @@ color: black;
     grid-template-columns: repeat(1, 90vw);
   }
 
+  a:hover {
+
+text-shadow: 0.5px 0.5px grey;
+
+
+
+  }
+
 .writing-title , .index-writing-show, {
-  padding-left: 15%;
-  padding-right: 15%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .index-writing-show {
-height: 500px;
+height: 15em;
   overflow: scroll;
 }
 

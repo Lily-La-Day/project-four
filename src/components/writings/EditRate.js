@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
@@ -163,6 +163,7 @@ console.log(this.state.hasRated)
         </div>}
 
 {this.state.hasRated && <h6> You've already rated this one! It currently has a rating of {this.props.edit.rating}</h6>}
+<Link to={`/edit-writings/${this.props.edit.original.id}/edit`}> <button className="edit-button"> Submit an edit! </button></Link>
       </main>
 
 

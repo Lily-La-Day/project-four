@@ -9,17 +9,8 @@ import axios from 'axios'
 class FinalShow extends React.Component {
   constructor() {
     super()
-
     this.state = { final: null }
-
-
-
   }
-
-
-
-
-
 
   componentDidMount() {
 
@@ -28,9 +19,6 @@ class FinalShow extends React.Component {
       .catch(err => console.log(err))
 
   }
-
-
-
 
   render() {
 
@@ -42,13 +30,8 @@ class FinalShow extends React.Component {
         <div className="writingcontainer">
           <h1>The Final Version</h1>
           <h2 className="writingTitle">{this.state.final.title}</h2>
-
           <p> {this.state.final.text}</p>
-
-          {/* <p> Edit submitted by: {this.state.final.edit.editor.username}</p> */}
         </div>
-
-
       </main>
 
     )
