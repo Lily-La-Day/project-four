@@ -42,7 +42,7 @@ class Register extends React.Component {
       this.setState({ type: 'writer' })
     }
 
-    document.querySelectorAll('.choice').forEach(el => el.style.display = 'none')
+    // document.querySelectorAll('.choice').forEach(el => el.style.display = 'none')
 
   }
 
@@ -50,14 +50,13 @@ class Register extends React.Component {
   render() {
     console.log(this.state)
     return (
-      <main className="register-section">
+      <main className="home register-section">
 
         <section className="container">
           <button className="choice writer" onClick={this.makeChoice}>Sign-Up to Write </button>  <button className="choice editor" onClick={this.makeChoice}>Sign-up to <span className="strikethrough">write</span> Edit</button>
           {(this.state.type === 'writer') &&  <form className="register form-style" onSubmit={this.handleSubmitWriter} >
-
+            <h3> Sign-up as a writer if you struggle to write and would like a helping hand. </h3>
             <div className="field">
-              {/* <label className="label">Username</label> */}
               <div className="control">
                 <input
                   className="input"
@@ -68,7 +67,6 @@ class Register extends React.Component {
               </div>
             </div>
             <div className="field">
-              {/* <label className="label">Email</label> */}
               <div className="control">
                 <input
                   className="input"
@@ -79,7 +77,6 @@ class Register extends React.Component {
               </div>
             </div>
             <div className="field">
-              {/* <label className="label">Password</label> */}
               <div className="control">
                 <input
                   className="input"
@@ -103,13 +100,11 @@ class Register extends React.Component {
               </div>
             </div>
             <button type="submit">Sign-Up to Write </button>
-
           </form>}
 
-          {(this.state.type === 'editor') && <form className="register form-style" onSubmit={this.handleSubmitEditor} >
-
+          {(this.state.type === 'editor') && <form className="register form-style edit-sign" onSubmit={this.handleSubmitEditor} >
+            <h3> Sign-up as an editor to do some good and give those who struggle to write, a helping hand. </h3>
             <div className="field">
-              {/* <label className="label">Username</label> */}
               <div className="control">
                 <input
                   className="input"
@@ -120,7 +115,6 @@ class Register extends React.Component {
               </div>
             </div>
             <div className="field">
-              {/* <label className="label">Email</label> */}
               <div className="control">
                 <input
                   className="input"
@@ -131,7 +125,6 @@ class Register extends React.Component {
               </div>
             </div>
             <div className="field">
-              {/* <label className="label">Password</label> */}
               <div className="control">
                 <input
                   className="input"
@@ -143,7 +136,6 @@ class Register extends React.Component {
               </div>
             </div>
             <div className="field">
-              {/* <label className="label">Password Confirmation</label> */}
               <div className="control">
                 <input
                   className="input"

@@ -56,38 +56,41 @@ class Login extends React.Component {
 
 
   render(){
-    console.log(this.props)
-
+    console.log(this.state.type)
     return (
-
-      <main>
+      <main onMouseOver={this.pathCheck}>
         <Nav />
         {(this.state.type === 'writer') &&
-        <form onMouseOver={this.pathCheck} className="form-style login" onSubmit={this.handleSubmitWriter}>
+        <section>
 
-          <label className='label'>Email</label>
-          <div className="control">
-            <input
-              onChange = {this.handleChange}
-              className="input"
-              name="email"
-              placeholder="Your Email Please."/>
-          </div>
-          <label className='label'>Password</label>
-          <div className="control">
-            <input
-              onChange = {this.handleChange}
-              type="password"
-              className="input"
-              name="password"
-              placeholder="Your Password Please."/>
-          </div>
+          <form onMouseOver={this.pathCheck} className="form-style login" onSubmit={this.handleSubmitWriter}>
+            <h3> Login as a Writer </h3>
+            <label className='label'>Email</label>
+            <div className="control">
+              <input
+                onChange = {this.handleChange}
+                className="input"
+                name="email"
+                placeholder="Your Email Please."/>
+            </div>
+            <label className='label'>Password</label>
+            <div className="control">
+              <input
+                onChange = {this.handleChange}
+                type="password"
+                className="input"
+                name="password"
+                placeholder="Your Password Please."/>
+            </div>
 
-          <button type="submit" className="button" > Login as Writer</button>
+            <button type="submit" className="button" > Login as Writer</button>
 
-        </form>}
+          </form>
+        </section>
+
+        }
         {(this.state.type === 'editor') && <form onMouseOver={this.pathCheck} className="form-style login"  onSubmit={this.handleSubmitEditor} >
-
+          <h3> Login as an Editor </h3>
           <label className='label'>Email</label>
           <div className="control">
             <input

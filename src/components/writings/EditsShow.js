@@ -51,6 +51,7 @@ class EditsShow extends React.Component {
     return (
       <main>
         <div className="edit-snippet-section">
+        
           {this.props.edits.map((edit, i) => (
             <div key={i}>
               { (this.state.num === i) &&
@@ -64,7 +65,7 @@ class EditsShow extends React.Component {
 
           {this.state.num > 0 && <button onClick={this.minusOne}  className="show-button">Last edit</button>}
 
-</div>
+        </div>
 
 
 

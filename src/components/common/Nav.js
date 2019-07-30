@@ -9,11 +9,6 @@ class Nav extends React.Component {
 
     this.state = { type: ''  }
     this.pathCheck = this.pathCheck.bind(this)
-
-
-
-
-
   }
 
   pathCheck() {
@@ -27,17 +22,10 @@ class Nav extends React.Component {
     this.pathCheck()
   }
 
-
-
-
-
   render() {
     console.log(this.state)
     return(
       <nav onMouseOver={this.pathCheck} className="navbar">
-
-
-
         {!Auth.isAuthenticated() && <Link to="/register" className="nav-item nav-one">Register</Link>}
         {!Auth.isAuthenticated() && <Link to="/writerlogin" className="nav-item nav-two" onClick={()=>this.pathCheck()} type={this.state.type}>Log In to Write</Link>}
         {!Auth.isAuthenticated() && <Link to="/edit-orlogin" className="nav-item nav-three" onClick={()=>this.pathCheck()} >Log In to Edit</Link>}
@@ -45,9 +33,6 @@ class Nav extends React.Component {
         {Auth.isAuthenticated() && <Link to="/" className="nav-item nav-four" onClick={() => Auth.logout()}>Log Out</Link>}
         {Auth.isAuthenticated() && (this.props.type === 'writer' || this.state.type === 'writer' ) && <Link to="/writingsubmit" className="nav-item nav-four">Submit Writing</Link>}
         {(this.props.type === 'editor' || this.state.type === 'editor') && Auth.isAuthenticated() && <Link to="/edit-writings" className="nav-item nav-three">The Writings</Link>}
-
-
-
       </nav>
     )
   }

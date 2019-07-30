@@ -32,42 +32,42 @@ class SearchIndex extends React.Component {
     switch(data) {
       case 'romantic':
         this.setState({
-          category: 1
+          category: 2
         })
         break
       case 'personal':
         this.setState({
-          category: 2
+          category: 15
         })
         break
       case 'business':
         this.setState({
-          category: 3
+          category: 11
         })
         break
       case 'formal':
         this.setState({
-          category: 4
+          category: 1
         })
         break
       case 'letters of complaint':
         this.setState({
-          category: 5
+          category: 26
         })
         break
       case 'work':
         this.setState({
-          category: 6
+          category: 3
         })
         break
       case 'cover letter':
         this.setState({
-          category: 7
+          category: 13
         })
         break
       case 'cv':
         this.setState({
-          category: 8
+          category: 12
         })
         break
       case 'family':
@@ -82,82 +82,102 @@ class SearchIndex extends React.Component {
         break
       case 'application':
         this.setState({
-          category: 11
+          category: 14
         })
         break
       case 'feedback':
         this.setState({
-          category: 12
+          category: 25
         })
         break
       case 'prose':
         this.setState({
-          category: 13
+          category: 7
         })
         break
       case 'short story':
         this.setState({
-          category: 14
+          category: 8
         })
         break
       case 'obituary':
         this.setState({
-          category: 15
+          category: 23
         })
         break
       case 'journalism':
         this.setState({
-          category: 16
+          category: 22
         })
         break
       case 'poetry':
         this.setState({
-          category: 17
+          category: 27
         })
         break
       case 'formal communication':
         this.setState({
-          category: 18
+          category: 19
         })
         break
       case 'enquiry':
         this.setState({
-          category: 19
+          category: 28
         })
         break
       case 'suggestion':
         this.setState({
-          category: 20
+          category: 16
         })
         break
       case 'criticism':
         this.setState({
-          category: 21
+          category: 18
         })
         break
       case 'blog':
         this.setState({
-          category: 22
+          category: 29
         })
         break
       case 'fan fiction':
         this.setState({
-          category: 23
+          category: 4
         })
         break
       case 'appreciation':
         this.setState({
-          category: 24
+          category: 30
         })
         break
       case 'branding':
         this.setState({
-          category: 25
+          category: 20
         })
         break
       case 'press release':
         this.setState({
-          category: 26
+          category: 21
+        })
+        break
+      case 'request':
+        this.setState({
+          category: 17
+        })
+        break
+      case 'language':
+        this.setState({
+          category: 5
+        })
+        break
+      case 'education':
+        this.setState({
+          category: 6
+        })
+        break
+      case 'apology':
+        this.setState({
+          category: 24
         })
         break
       default:
@@ -174,17 +194,13 @@ class SearchIndex extends React.Component {
 
   handleInputChange(e) {
     e.preventDefault()
-    console.log(this.state.query, this.state.category)
     this.setState({
       query: this.search.value
     }, () => {
       if (this.state.query && this.state.query.length > 1) {
         this.setCategory(this.state.query)
-
       }
     })
-
-
   }
 
   render() {

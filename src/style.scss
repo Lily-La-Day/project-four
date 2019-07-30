@@ -6,12 +6,9 @@
 * {
   text-decoration: none;
   box-sizing: border-box;
-
-
   background-repeat: no-repeat;
 
 }
-
 
 
 
@@ -33,9 +30,13 @@ main {
 }
 
 [class*="edits"] {
-  color: DarkBlue !important;
+  text-background: yellow;
   font-weight: 800;
+h6 {
+  background-color: yellow;
 
+  padding: 5px;
+}
 }
 
 h6 {
@@ -112,6 +113,12 @@ display: grid;
 
 }
 
+.home {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('./assets/background.jpg')
+}
+
 .original {
   grid-column: 1;
   grid-row: 1;
@@ -126,7 +133,7 @@ margin-top: 100px;
   display: grid;
   justify-content: center;
   align-items: center;
-
+margin-left: 5em;
 white-space: pre-line !important;
   align-items: center;
 
@@ -145,13 +152,17 @@ white-space: pre-line !important;
   display: grid;
   grid-template-columns: repeat(2, 50%);
   align-items: center;
-  grid-column-gap: 5%;
+  grid-column-gap: 2%;
 
 }
 .create-edit {
   grid-column: 2;
-  margin-top: -2em;
 
+
+
+}
+.mode {
+  margin-bottom: 1em;
 }
 
 .edit-form-title {
@@ -184,13 +195,13 @@ white-space: pre-line !important;
 
 .choice {
   width: 10em;
-  height: 4em;
+
 }
 
 .writer {
 color: black;
-grid-column: 2;
-grid-row: 2;
+grid-column: 1;
+grid-row: 1;
 font-size: 1.5em;
 justify-self: start;
 background-color: transparent;
@@ -201,6 +212,11 @@ box-shadow: none;
 .own-edits {
   text-align: center;
   font-size: 1.5em;
+
+}
+
+.subtitle {
+  text-align: center;
 }
 
 h3 {
@@ -208,8 +224,12 @@ h3 {
 }
 
 .next-edit {
-
+  margin-bottom: 10px;
   justify-self: center;
+}
+
+button:hover {
+  background-color: yellow;
 }
 
 .make-final {
@@ -220,14 +240,13 @@ h3 {
 }
 
 .editor {
-  grid-column: 3;
-  grid-row: 2;
-
+  grid-column: 4;
+  grid-row: 1;
   font-size: 1.5em;
-
   background-color: transparent;
   border: 0px;
   box-shadow: none;
+  justify-self: right;
 }
 
 .strikethrough {
@@ -275,16 +294,20 @@ margin-right: 25%;
 .register {
   grid-area: 2/2;
   justify-self: start;
-  width: 60%;
+
   margin: 0 auto;
   background-color: white;
-  padding: 5%;
+
   font-size: 1.1em;
 
   background-color: transparent;
 
 
 
+}
+
+.edit-sign {
+  grid-area: 2/3;
 }
 
 .form, .form-style {
@@ -297,11 +320,13 @@ margin-right: 25%;
 }
 
 
-
+.textarea {
+    font-family: 'Open Sans', sans-serif !important;
+}
 
 
 .form-style{
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   width: 500px;
   padding: 30px;
   background: #FFFFFF;
@@ -314,7 +339,6 @@ margin-right: 25%;
   margin: 0 auto;
   background: #797979;
   font-family: 'Open Sans', sans-serif;
-
   font-size: 18px;
   font-weight: 100;
   padding: 20px;
@@ -331,7 +355,7 @@ margin-right: 25%;
   outline: none;
   display: block;
   width: 100%;
-  padding: 7px;
+  padding: auto !important;
   border: none;
   border-bottom: 1px solid #ddd;
   background: transparent;
@@ -368,7 +392,7 @@ margin-right: 25%;
 }
 
 .login {
-  grid-area: 3 / 2 / 3 / 3;
+margin-top: 10em;
   width: 30%;
 
 }
@@ -377,6 +401,10 @@ margin-right: 25%;
   position: fixed;
   left: 0;
   top: 1em;
+}
+
+#original-writing {
+  height: 8em !important;
 }
 
 .show {
@@ -429,8 +457,19 @@ grid-column: 1;
 margin-bottom: 0.75em;
 margin-top: 0.75em;
 
+}
+
+.words {
+  font-size: 0.8em;
+}
+
+.sub {
+  margin-left: 45%;
+border: none;
 
 }
+
+
 
 p, text, h5 {
       white-space: pre-line;
@@ -460,13 +499,27 @@ p, text, h5 {
 .submit-writing {
   height: 25em !important;
   overflow: scroll !important;
+  padding: auto !important;
+  font-family: 'Open Sans', sans-serif !important;
+
+}
+
+.submit-button {
+
+}
+
+
+.form-small {
+  font-size: 0.7em !important;
+  height: 1.5em !important;
+  margin-top: -1em!important;
+  padding: auto !important;
 }
 
 .content {
   text-align: center;
 }
 .content h1 {
-  font-family: 'Sansita', sans-serif;
   letter-spacing: 1px;
   color: #282828;
   margin-bottom: 10px;
@@ -570,16 +623,12 @@ p, text, h5 {
 }
 
 .register {
-width: 80%;
-
-
   margin: 0 auto;
+  width: 20em;
   background-color: white;
-  padding: 5%;
   font-size: 1.1em;
-
-color: black;
-  background-color: transparent;
+  color: black;
+  background-color: white;
 
 
 }
@@ -608,8 +657,14 @@ color: black;
   overflow: auto;
 }
 
+.snippet {
+
+  margin: 0 auto;
+}
+
+
 .writing-title {
-  padding: 5px;
+  margin-top: -1em;
 }
 
 .scroll::-webkit-scrollbar {
@@ -690,15 +745,20 @@ height: 15em;
 .alt-word {
   padding: 0.5em;
   word-wrap: normal;
-  word-spacing: 5px;
 }
 
 .alts {
   font-size: 0.7em;
+  height: auto !important;
 }
 
 
 .form-small label {
   padding: 0;
   font-size: 1.2em;
+}
+
+.edit-title {
+  margin-top: -2em;
+  font-weight: bold;
 }

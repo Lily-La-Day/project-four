@@ -9,11 +9,8 @@ class OwnWritingShow extends React.Component {
   constructor() {
     super()
 
-    this.state = {  edits: null, finals:null, filteredEdits: null }
+    this.state = {  edits: null, finals: null, filteredEdits: null }
     this.filterFinals = this.filterFinals.bind(this)
-
-
-
   }
 
   getFinals() {
@@ -23,59 +20,38 @@ class OwnWritingShow extends React.Component {
   }
 
   filterFinals() {
-
-    let filtered = this.state.edits.map(edit => edit.id)
-    let finals = this.state.finals.map(final => final.edit.id)
+    const filtered = this.state.edits.map(edit => edit.id)
     this.setState({ filteredEdits: filtered })
-
-
   }
 
   getEdits() {
     const edits = []
     axios.get(`/api/writings/${this.props.writing.id}/edits`)
-
       .then(res => this.setState({ edits: edits.concat(res.data) }, () => this.getFinals()))
       .catch(err => console.log(err))
 
   }
 
-
-
   componentDidMount() {
-  this.getEdits()
-
+    this.getEdits()
   }
 
-
-
-
   render() {
-    // if (!this.state.edits) return null
+
     if (!this.props.writing) return null
-    if (!this.state.finals) return null
-    // if (!this.state.filteredEdits) return null
-    if (!this.state.edits) return null
 
 
-    // this.diff('human', 'humat')
     return (
-
       <main>
         <div className="writingcontainer">
-
-
-          <h2 className="writingTitle">{this.props.writing.title}</h2>
-
+          <h6 className="subtitle"> Your writing...</h6>
+          <h3 className="writingTitle">{this.props.writing.title}</h3>
           <p key={this.props.writing.id} > {this.props.writing.text}</p>
-
-          {this.state.filteredEdits &&
-          <OwnEditsShow edits={this.state.edits} writing={this.props.writing} finals={this.state.finals}/>}
-
-
+          {this.state.edits && this.state.filteredEdits &&
+          <OwnEditsShow edits={this.state.edits}
+            writing={this.props.writing}
+            finals={this.state.finals}/>}
         </div>
-
-
       </main>
 
     )

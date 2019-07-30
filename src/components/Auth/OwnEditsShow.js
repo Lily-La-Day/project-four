@@ -3,12 +3,6 @@ import axios from 'axios'
 import Auth from '../../lib/Auth'
 import FinalShow from './FinalShow'
 
-// import { Link } from 'react-router-dom'
-
-
-
-
-
 
 class OwnEditsShow extends React.Component {
   constructor() {
@@ -49,51 +43,39 @@ class OwnEditsShow extends React.Component {
 
   selectFinal(edito) {
 
-    const edit_id = { id: edito.id }
+    const editId = { id: edito.id }
+    const data = { edit: editId  }
 
-    const data = { edit: edit_id  }
-
-    this.setState({ final : data })
+    this.setState({ final: data })
     this.setState({ 'edit': data })
     this.setState({ edited: edito })
   }
 
-
-
   confirmFinal() {
-
     this.setState({ confirmation: true })
     this.postFinal()
   }
 
-
-
   postFinal() {
-    console.log(this.state.final)
     axios.post('/api/finals', this.state.final, {
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
-
-
+    })
+      .catch((err) => console.log(err))
+    axios.post(`/api/writings/${this.state.edited.original.id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}`}
     })
       .catch((err) => console.log(err))
 
-    axios.post(`/api/writings/${this.state.edited.original.id}`, {
-        headers: { Authorization: `Bearer ${Auth.getToken()}`}
-
-
-      })
-        .catch((err) => console.log(err))
-
   }
-
 
   render() {
 
-    if (!this.props.edits) return null
-    if(!this.props)
-    
+    if(!this.props) return null
+
     return (
       <main>
+        <h3> Here are the edits that have been submitted so far...</h3>
+        <h6 className="subtitle"> When you find one you like, click to make final and confirm it as the finished draft!</h6>
         {!this.state.confirmation && <div className="edit-snippet-section">
           {this.props.edits.map((edito, i) => (
             <div key={i}>
@@ -101,27 +83,30 @@ class OwnEditsShow extends React.Component {
                 <section className="own-edits">
                   <h4>{edito.title}</h4>
                   <h6>{edito.text}</h6>
+                  <h6>Submitted by {edito.editor.username}</h6>
                   {edito.rating &&
+
+
                     <h2>{edito.rating} </h2>}
-                    {!this.state.final && <button className="make-final" onClick={() => this.selectFinal(edito)}>Make Final</button>}
-                    {this.state.final && <button className="make-final" onClick={() => this.confirmFinal(edito)}>Are you sure!? Once you confirm
+                  {!this.state.final &&
+                    <button className="make-final"
+                      onClick={() => this.selectFinal(edito)}>Make Final</button>}
+                  {this.state.final &&
+                      <button className="make-final"
+                        onClick={() => this.confirmFinal(edito)}>Are you sure!? Once you confirm
                   it is confirmed!</button>}
-                  </section> }
-
-
-
-
+                </section> }
             </div>
-
           ))}
 
-        {this.state.num < this.props.edits.length &&  <button className="next-edit" onClick={this.addOne}>Next Edit</button>}
-        {this.state.num > 0 && <button className="next-edit" onClick={this.minusOne}>Last Edit</button>}
+          {this.state.num < this.props.edits.length &&
+               <button className="next-edit" onClick={this.addOne}>Next Edit</button>}
+          {this.state.num > 0 &&
+              <button className="next-edit" onClick={this.minusOne}>Last Edit</button>}
 
         </div>}
         {this.state.confirmation && <FinalShow edit={this.state.final}/>}
-
-  </main>
+      </main>
 
     )
   }
