@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve:react": "webpack-dev-server --mode=development",
     "serve:flask": "pipenv run flask run",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "postinstall": "[ \"$NODE_ENV\" = \"production\" ] && yarn build || exit 0"
   },
   "author": "",
   "license": "ISC",

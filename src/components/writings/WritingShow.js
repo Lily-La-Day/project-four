@@ -57,7 +57,7 @@ class WritingShow extends React.Component {
       <main>
         {!this.state.seeTheEdits &&
           <div className="writingcontainer">
-            <h2 className="writing-show-title">{this.state.writing.title}</h2>
+            <h2 className="writingTitle">{this.state.writing.title}</h2>
             <p  className="writing-show" key={this.state.writing.id} >
               {this.state.writing.text}</p>
             <Link to={`/edit-writings/${this.state.writing.id}/edit`}>

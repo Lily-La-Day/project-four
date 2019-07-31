@@ -1,7 +1,5 @@
 import React from 'react'
-import axios from 'axios'
-
-import { Link } from 'react-router-dom'
+// import axios from 'axios'
 import EditRate from './EditRate'
 
 
@@ -51,7 +49,7 @@ class EditsShow extends React.Component {
     return (
       <main>
         <div className="edit-snippet-section">
-        
+
           {this.props.edits.map((edit, i) => (
             <div key={i}>
               { (this.state.num === i) &&
