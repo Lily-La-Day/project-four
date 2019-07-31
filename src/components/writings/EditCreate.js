@@ -55,6 +55,8 @@ class EditCreate extends React.Component {
   changeMode() {
     if(!this.state.definition)
       this.setState({ definition: true })
+    else if(this.state.definition)
+      this.setState({ definition: false })
 
   }
 
