@@ -2,9 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
 
-
-
-
+const token = process.env.X_MASHAPE_KEY
 
 
 class EditCreate extends React.Component {
@@ -16,8 +14,10 @@ class EditCreate extends React.Component {
       data: { },
       autoWordData: [],
       text: [],
-      word: '', wordData: [],
-      textTwo: '', query: '',
+      word: '',
+      wordData: [],
+      textTwo: '',
+      query: '',
       highlighted: '',
       synonyms: null,
       autosynonyms: null,
@@ -28,7 +28,7 @@ class EditCreate extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.makeArray = this.makeArray.bind(this)
     this.setWord = this.setWord.bind(this)
-    this.stateCheck = this.stateCheck.bind(this)
+
     this.handleInputChange = this.handleInputChange.bind(this)
     this.matchWord = this.matchWord.bind(this)
     this.autoGetWords = this.autoGetWords.bind(this)
@@ -45,7 +45,8 @@ class EditCreate extends React.Component {
     let text = []
     const data = {...this.state.data, [name]: value, original: { id: this.state.writing.id } }
     this.setState({ data, error: ''})
-    text = data.text.split(' ')
+    text = data.text.split('.').join('')
+    text = text.split(' ')
     this.setState({ textTwo: text })
     this.setState({
       query: text[text.length - 2]
@@ -72,6 +73,7 @@ class EditCreate extends React.Component {
         this.setState({
           query: ''
         })
+        document.querySelectorAll('.highlighted').forEach(el => el.classList.remove('highlighted'))
       }
     }
 
@@ -82,6 +84,7 @@ class EditCreate extends React.Component {
     const text = [this.state.writing.text.split(' ')][0]
     text.map((word) => {
       const span = document.createElement('span')
+
       span.textContent = `${word} `
       word = span
     })
@@ -90,7 +93,7 @@ class EditCreate extends React.Component {
 
   getWords() {
     axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.word}`,  {
-      headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800'}
+      headers: { 'X-Mashape-Key': token }
     })
       .then((res) => {
         this.setState({wordData: res.data.results})
@@ -100,13 +103,16 @@ class EditCreate extends React.Component {
         this.setState({ synonyms: synonyms })
 
       })
+      .then(this.setState({wordData: ''}))
+
 
   }
 
   autoGetWords(e) {
+    this.setState({ synonyms: null })
     if(e.keyCode === 32){
       axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.query}`,  {
-        headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800'}
+        headers: { 'X-Mashape-Key': token }
       })
         .then((res) => {
           this.setState({autoWordData: res.data.results})
@@ -133,11 +139,9 @@ class EditCreate extends React.Component {
     this.setState({word: e.target.innerText})
   }
 
-  stateCheck() {
-    console.log('autoGetWord', this.state.autoWordData)
-  }
 
   componentDidMount() {
+
     axios.get(`/api/writings/${this.props.match.params.id}`)
       .then(res => this.setState({ writing: res.data, original: { id: res.data.id } }))
       .catch(err => console.log(err))
@@ -147,6 +151,8 @@ class EditCreate extends React.Component {
   render() {
     if (!this.state.writing) return null
     const { writing } =  this.state
+
+
     return (
       <main >
         <div className="edit-container"
@@ -163,9 +169,9 @@ class EditCreate extends React.Component {
 
               <div className="writings-container scroll" >
                 {!this.state.textTwo &&
-                  this.state.text.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className="words highlighted">{word}</p>)}
+                  this.state.text.map((word) => <p key={word.id} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className="words highlighted">{word}</p>)}
                 {this.state.textTwo &&
-                  this.state.textTwo.map((word, i) => <p key={i} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className={word} >{word}</p>)}
+                  this.state.textTwo.map((word) => <p key={word.id} onMouseDown={this.setWord} onMouseUp={()=>this.getWords()} className={word} >{word}</p>)}
               </div>
               {this.state.definition &&
                  <div className="alts container" >
@@ -173,11 +179,11 @@ class EditCreate extends React.Component {
                   this.state.wordData &&
                    this.state.wordData.map((word, i) =>
                      (i < 20) &&
-                   <p className="alt-word" key={i}>{word.definition}</p>)}
+                   <p className="alt-word" key={word.id}>{word.definition}</p>)}
                    {this.state.autoWordData &&
                       this.state.autoWordData.map((word, i) =>
                         (i < 20) &&
-                   <p className="alt-word" key={i}>{word.definition}</p>)}
+                   <p className="alt-word" key={word.id}>{word.definition}</p>)}
 
                  </div>}
               {!this.state.definition &&
@@ -185,12 +191,12 @@ class EditCreate extends React.Component {
                    {this.state.synonyms &&
                   this.state.synonyms.map((word, i) =>
                     (i < 20) &&
-                  word.map(el => <p className="alt-word" key={i}>{el}</p>)
+                  word.map(el => <p className="alt-word" key={el.id}>{el}</p>)
                   )}
                    {!this.state.synonyms &&
                     this.state.autosynonyms && this.state.autosynonyms.map((word, i) =>
                      (i < 20) &&
-                  word.map(el => <p className="alt-word" key={i}>{el}</p>)
+                  word.map(el => <p className="alt-word" key={el.id}>{el}</p>)
                    )}
                  </div>}
             </div>

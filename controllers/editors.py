@@ -31,7 +31,7 @@ def login():
 
 @api.route('/editor', methods=['GET'])
 @secure_route_editor
-def editor():
+def getEditor():
     print(g.current_editor)
     return editor_schema.jsonify(g.current_editor), 200
 

@@ -26,16 +26,6 @@ def create():
     return final_schema.jsonify(final), 201
 
 
-# @api.route('/final/<int:edit_id>', methods=['GET'])
-#
-# def showFinal(edit_id):
-#     final = Final.query.join(Final.edit).filter(Edit.id == edit_id).all()
-#     print(final)
-#     # final, errors = final_schema.load(final)
-#     if not final:
-#         return jsonify({'message': 'not found'}), 404
-#     return final_schema.jsonify(final, many=True), 201
-
 @api.route('/final/<int:final_id>', methods=['GET'])
 def showFinal(final_id):
     final = Final.query.get(final_id)

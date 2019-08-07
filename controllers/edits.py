@@ -7,10 +7,6 @@ from lib.secure_route import secure_route_editor
 api = Blueprint('edits', __name__)
 edit_schema = EditSchema()
 
-
-
-
-
 @api.route('/edits', methods=['GET'])
 def index():
     edits = Edit.query.all()

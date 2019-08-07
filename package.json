@@ -32,15 +32,14 @@
   "dependencies": {
     "axios": "^0.19.0",
     "diff": "^4.0.1",
-    "dotenv": "^8.0.0",
+    "dotenv-webpack": "^1.7.0",
     "filestack-react": "^3.0.1",
     "flask": "^0.2.10",
     "homedir-polyfill": "^1.0.3",
+    "install": "^0.13.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-horizontal-scrolling-menu": "^0.7.0",
-    "react-perfect-scrollbar": "^1.5.3",
     "react-router-dom": "^5.0.1",
-    "react-scroll-horizontal": "^1.6.2"
+    "remove": "^0.1.5"
   }
 }

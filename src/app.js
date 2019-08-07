@@ -1,8 +1,8 @@
+// require('dotenv').config
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './style.scss'
-
 import EditCreate from './components/writings/EditCreate'
 import WritingCreate from './components/writings/WritingCreate'
 import WritingShow from './components/writings/WritingShow'
@@ -14,6 +14,7 @@ import SearchIndex from './components/writings/SearchIndex'
 import Nav from './components/common/Nav'
 import Home from './components/common/Home'
 
+console.log(process.env.X_MASHAPE_KEY)
 
 
 
