@@ -1,8 +1,7 @@
 from flask import Blueprint, jsonify, request, g
 from models.writer import Writer, WriterSchema
-from models.writing import Writing
 from lib.secure_route import secure_route
-# from models.edit import Edit, EditSchema
+
 
 
 api = Blueprint('edits', __name__)

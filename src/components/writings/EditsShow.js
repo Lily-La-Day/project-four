@@ -31,41 +31,28 @@ class EditsShow extends React.Component {
     this.setState({ num: number })
   }
 
-
-
-
-
-
   render() {
 
     if (!this.props.edits) return null
     if(!this.props)
+      return (
+        <main>
+          <div className="edit-snippet-section">
 
-      console.log(this.props.edits)
-    console.log(typeof this.props.edits)
-    // this.diff('human', 'humat')
-
-
-    return (
-      <main>
-        <div className="edit-snippet-section">
-
-          {this.props.edits.map((edit, i) => (
-            <div key={i}>
-              { (this.state.num === i) &&
+            {this.props.edits.map((edit, i) => (
+              <div key={i}>
+                { (this.state.num === i) &&
               <EditRate edit={edit} writing={this.props.writing}/> }
 
-            </div>
+              </div>
 
-          ))}
+            ))}
 
-          {this.state.num < this.props.edits.length && <button onClick={this.addOne} className="show-button">Next edit</button>}
+            {this.state.num < this.props.edits.length && <button onClick={this.addOne} className="show-button">Next edit</button>}
 
-          {this.state.num > 0 && <button onClick={this.minusOne}  className="show-button">Last edit</button>}
+            {this.state.num > 0 && <button onClick={this.minusOne}  className="show-button">Last edit</button>}
 
-        </div>
-
-
+          </div>
 
 
 
@@ -75,9 +62,11 @@ class EditsShow extends React.Component {
 
 
 
-      </main>
 
-    )
+
+        </main>
+
+      )
   }
 }
 

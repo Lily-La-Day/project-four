@@ -1,7 +1,5 @@
 from flask import Blueprint, jsonify, request, g
 from models.writing import Writing, WritingSchema
-from models.category import Category
-# from lib.helpers import is_unique
 from lib.secure_route import secure_route
 
 api = Blueprint('writings', __name__)
@@ -39,6 +37,5 @@ def show(writing_id):
 def deactivate(writing_id):
     writing = Writing.query.get(writing_id)
     writing.active = False
-
     writing.save()
     return writing_schema.jsonify(writing), 201

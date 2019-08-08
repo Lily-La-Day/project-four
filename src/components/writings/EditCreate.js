@@ -62,13 +62,14 @@ class EditCreate extends React.Component {
       if(e.keyCode === 32){
         this.state.textTwo.forEach((word) => {
           if(word.length > 1 && word === this.state.query) {
-            document.querySelector(`.${word}`).classList.add('highlighted')
+            console.log('word')
+
           }
         })
         this.setState({
           query: ''
         })
-        document.querySelectorAll('.highlighted').forEach(el => el.classList.remove('highlighted'))
+
       }
     }
 
@@ -78,8 +79,9 @@ class EditCreate extends React.Component {
   makeArray() {
     const text = [this.state.writing.text.split(' ')][0]
     text.map((word) => {
+      word = word.split('.').join('')
+      word = word.split(' ')
       const span = document.createElement('span')
-
       span.textContent = `${word} `
       word = span
     })
@@ -88,7 +90,7 @@ class EditCreate extends React.Component {
 
   getWords() {
     axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.word}`,  {
-      headers: { 'X-Mashape-Key': process.env.X_MASHAPE_KEY }
+      headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800' }
     })
       .then((res) => {
         this.setState({wordData: res.data.results})
@@ -104,10 +106,10 @@ class EditCreate extends React.Component {
   }
 
   autoGetWords(e) {
-    this.setState({ synonyms: null })
+
     if(e.keyCode === 32){
       axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.query}`,  {
-        headers: { 'X-Mashape-Key': process.env.X_MASHAPE_KEY }
+        headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800' }
       })
         .then((res) => {
           this.setState({autoWordData: res.data.results})
@@ -116,7 +118,10 @@ class EditCreate extends React.Component {
           synonyms = synonyms.filter(array => array)
           this.setState({ autosynonyms: synonyms })
         })
+
     }
+
+    this.setState({ synonyms: null })
   }
 
   handleSubmit(e) {
@@ -147,6 +152,7 @@ class EditCreate extends React.Component {
     if (!this.state.writing) return null
     const { writing } =  this.state
     console.log('deployed')
+    console.log(this.state.query)
     return (
       <main >
         <div className="edit-container"
@@ -237,7 +243,7 @@ class EditCreate extends React.Component {
             <button type="submit" className="searchButton">
               <i className="fa fa-search"></i>
             </button>
-            <p>{this.state.query}</p>
+            <p className="highlighted">{this.state.query}</p>
           </form>
         </div>
       </main>
