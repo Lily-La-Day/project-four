@@ -1,10 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
-
-const token = process.env.X_MASHAPE_KEY
-
-
 class EditCreate extends React.Component {
   constructor() {
     super()
@@ -28,7 +24,6 @@ class EditCreate extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.makeArray = this.makeArray.bind(this)
     this.setWord = this.setWord.bind(this)
-
     this.handleInputChange = this.handleInputChange.bind(this)
     this.matchWord = this.matchWord.bind(this)
     this.autoGetWords = this.autoGetWords.bind(this)
@@ -93,7 +88,7 @@ class EditCreate extends React.Component {
 
   getWords() {
     axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.word}`,  {
-      headers: { 'X-Mashape-Key': token }
+      headers: { 'X-Mashape-Key': process.env.X_MASHAPE_KEY }
     })
       .then((res) => {
         this.setState({wordData: res.data.results})
@@ -112,7 +107,7 @@ class EditCreate extends React.Component {
     this.setState({ synonyms: null })
     if(e.keyCode === 32){
       axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.query}`,  {
-        headers: { 'X-Mashape-Key': token }
+        headers: { 'X-Mashape-Key': process.env.X_MASHAPE_KEY }
       })
         .then((res) => {
           this.setState({autoWordData: res.data.results})
@@ -151,8 +146,7 @@ class EditCreate extends React.Component {
   render() {
     if (!this.state.writing) return null
     const { writing } =  this.state
-
-
+    console.log('deployed')
     return (
       <main >
         <div className="edit-container"
