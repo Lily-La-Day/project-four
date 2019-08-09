@@ -157,7 +157,7 @@ I decided to use the public Words API and have it automatically generate and dis
           this.setState({ autosynonyms: synonyms })
         })
     }
-    ```
+```
 
 This is how the functions were applied to the form:
 
