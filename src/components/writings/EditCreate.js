@@ -1,6 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
+
+const token = process.env.X_MASHAPE_KEY
+
 class EditCreate extends React.Component {
   constructor() {
     super()
@@ -90,7 +93,7 @@ class EditCreate extends React.Component {
 
   getWords() {
     axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.word}`,  {
-      headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800' }
+      headers: { 'X-Mashape-Key': token }
     })
       .then((res) => {
         this.setState({wordData: res.data.results})
@@ -109,7 +112,7 @@ class EditCreate extends React.Component {
 
     if(e.keyCode === 32){
       axios.get(`https://wordsapiv1.p.mashape.com/words/${this.state.query}`,  {
-        headers: { 'X-Mashape-Key': '3460369150msh8609f9e537602d4p1446a9jsnb662278c8800' }
+        headers: { 'X-Mashape-Key': token }
       })
         .then((res) => {
           this.setState({autoWordData: res.data.results})

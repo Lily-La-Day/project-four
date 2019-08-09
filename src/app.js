@@ -14,10 +14,6 @@ import SearchIndex from './components/writings/SearchIndex'
 import Nav from './components/common/Nav'
 import Home from './components/common/Home'
 
-console.log(process.env.X_MASHAPE_KEY)
-
-
-
 const App = () => {
   return (
     <BrowserRouter>
