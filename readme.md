@@ -176,7 +176,7 @@ This is how the functions were applied to the form:
 
 **The Writer Experience**
 
-The writer's user experience is more limited. Writer's are directed to a "submit a writing" page upon login.
+The writer's user experience is more limited. Writers are directed to a "submit a writing" page upon login.
 
 **Submitting a Writing**
 
