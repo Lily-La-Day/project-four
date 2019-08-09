@@ -120,7 +120,7 @@ def showEdits(writing_id):
     if not edits:
         return jsonify({'message': 'not found'}), 404
     return edit_schema.jsonify(edits, many=True), 200
-    ```
+```
 
 
 **Rating The Edits**
