@@ -17,9 +17,9 @@ Am i write? is an online platform that allows two distinct user types to either 
 |--- |--- |--- |
 |React|JavaScript(ES6)|SCSS|
 |GitHub|postgreSQL|SQLAlchemy
-|Node.js|Webpack|Yarn
+|Python|Webpack|Yarn
 |bcrypt|jsonwebtoken|axios
-|body-parser|file-loader|
+|body-parser|file-loader|Flask
 
 #### Words API
 The application uses a third party API within the edit page. This page offers editors the ability to create a new version of a user submitted writing. While creating their edit, synonyms and definitions of the words they type/select are automatically generated.
