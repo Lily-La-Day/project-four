@@ -228,6 +228,8 @@ It is also quite evident that I haven't yet focussed any time or attention on st
 
 I did not use a CSS framework and I think this was a mistake. In future I will consider these things more carefully.
 
-At the outset of this project I decided that my ultimate priority was to challenge myself and to really put into practice as many of the skills I had developed during the course as possible.
+## Wins 
 
-I am very happy with what I managed to achieve within a week, my priority, as always, was to learn and to focus on learning the things that  will be of most value to me going forward. Looking back, I am extremely glad that I did not choose an easier option.
+At the outset of this project I decided that my intention was to challenge myself and to really put into practice as many of the skills I had developed during the course as possible.
+
+I am very happy with what I managed to achieve within a week, I really pushed myself both in the design of my back-end and the relationships between my models and also when it came to adding functionality to front-end. I am pleased that I was successful in incorporating the Words API in the way that envisioned. My priority, as always, was to learn and to focus on learning the things that  will be of most value to me going forward. Looking back, I am extremely glad that I did not choose an easier option.
