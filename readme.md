@@ -36,7 +36,7 @@ If you would like to download this repository and run the code yourself simply c
 <!-- to install JavaScript Packages: -->
 $ yarn
 <!-- to install Python packages: -->
-$ pipenv
+$ pipenv install flask
 <!--Then to seed the database: -->
 $ pipenv run python seeds.py
 <!-- Run the frontend in your localhost: -->
