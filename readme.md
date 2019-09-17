@@ -50,11 +50,13 @@ $ yarn serve:flask
 Once registered and logged in as either a writer or an editor:
 
 Writers can:
+
 * View their own submitted writings.
 * View submitted edits of their own writing and the ratings of these edits.
 * Decide upon a final version of their writing, making one of the edits a "final".
 
 Editors can:
+
 * View submitted writings.
 * Filter submitted writings and search by type.
 * View submitted edits of each writing.
